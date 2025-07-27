@@ -1,0 +1,22 @@
+import Link from "next/link";
+
+export default function Navbar() {
+    return(
+        <div className="w-[100vw] h-16 flex flex-row justify-between items-center bg-purple-200 py-7 px-48">
+            <div className="title-container">
+                <h1 className="font-bold">日本語 Learner</h1>
+                <p className="text-xs">Japanese</p>
+            </div>
+            <div className="links-and-account-container flex flex-row justify-between items-center">
+                <div className="links-container mx-20">
+                    <Link href="/" className="p-2 hover:underline">Home</Link>
+                    <Link href="/" className="p-2 hover:underline">Word List</Link>
+                </div>
+                <div className="account-container">
+                    <Link href="/login" className="p-1 font-bold">Login</Link>/
+                    <Link href="/signup" className="p-1">Signup</Link>
+                </div>
+            </div>
+        </div>
+    )
+}
