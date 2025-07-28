@@ -1,6 +1,22 @@
+'use client'
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function Navbar() {
+    
+    const [user, setUser] = useState({});
+
+    const loadUser = () => {
+        const data = JSON.parse(localStorage.getItem('user') || '{}');
+        if(data != null) {
+            setUser(data); 
+        }
+    }
+
+    useEffect(() => {
+        loadUser();
+    },[])
+
     return(
         <div className="w-[100vw] h-16 flex flex-row justify-between items-center bg-purple-200 py-7 px-48">
             <div className="title-container">
@@ -15,6 +31,7 @@ export default function Navbar() {
                 <div className="account-container">
                     <Link href="/login" className="p-1 font-bold">Login</Link>/
                     <Link href="/signup" className="p-1">Signup</Link>
+                    <p>{user.firstname}</p>
                 </div>
             </div>
         </div>

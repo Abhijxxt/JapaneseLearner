@@ -1,4 +1,8 @@
 'use client'
+
+import { redirect } from "next/navigation"
+// import { useRouter } from "next/router"
+
 export default function LoginPage() {
 
     const login = async (event : any) => {
@@ -15,9 +19,13 @@ export default function LoginPage() {
         })
         const data = await response.json()
         if(response.status === 200) {
-            console.log("True")
+            // console.log(data)
+            // const router = useRouter()
+            localStorage.setItem('user', JSON.stringify(data));
+            redirect("/home")
         } else {
             console.log("False")
+            alert("Login failed")
         }
     }
 
