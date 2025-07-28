@@ -10,7 +10,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
@@ -18,5 +18,21 @@ model User {
   uid Int @id @default(autoincrement())
   firstname String 
   lastname String
-  email String @unique 
+  email String @unique
+  password String 
+}
+
+model Words {
+  wid Int @id @default(autoincrement())
+  english String 
+  japanese String
+  romanji String
+  image String?
+}
+
+model Saved {
+  uid Int 
+  wid Int
+  proficiency Float @default(0)
+  @@id([uid,wid])
 }
