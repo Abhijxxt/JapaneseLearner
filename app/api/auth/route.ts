@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { PrismaClient } from "@/app/generated/prisma/client"
-const prisma = new PrismaClient()
+import { prisma } from "@/prisma/client";
 // use `prisma` in your application to read and write data in your DB
 
 // export async function GET(request: NextRequest) {

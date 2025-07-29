@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 export default function Navbar() {
     
-    const [user, setUser] = useState({});
+    const [user, setUser] : any = useState([]);
 
     const loadUser = () => {
         const data = JSON.parse(localStorage.getItem('user') || '{}');
@@ -18,14 +18,14 @@ export default function Navbar() {
     },[])
 
     return(
-        <div className="w-[100vw] h-16 flex flex-row justify-between items-center bg-purple-200 py-7 px-48">
+        <div className="w-[100vw] h-16 flex flex-row justify-between items-center bg-amber-500 py-7 px-48">
             <div className="title-container">
-                <h1 className="font-bold">日本語 Learner</h1>
+                <h1 className="font-bold"><Link href="/">日本語 Learner</Link></h1>
                 <p className="text-xs">Japanese</p>
             </div>
             <div className="links-and-account-container flex flex-row justify-between items-center">
                 <div className="links-container mx-20">
-                    <Link href="/" className="p-2 hover:underline">Home</Link>
+                    <Link href="/home" className="p-2 hover:underline">Home</Link>
                     <Link href="/" className="p-2 hover:underline">Word List</Link>
                 </div>
                 <div className="account-container">
