@@ -28,6 +28,8 @@ model Words {
   japanese String
   romanji String
   image String?
+  category String
+  subcategory String
 }
 
 model Saved {
