@@ -19,11 +19,12 @@ export default function WordlistPage() {
     useEffect(() => { fetchWords() },[])
 
     return(
-        <div>
-            Word list
-            {words && words.map((word: any) => (
-                <Card key={word.id} props={word} />
-            ))}
+        <div className="w-auto bg-blue-200 py-10 px-48">
+            <div className="grid grid-cols-3 grid">
+                {words && words.map((word: any) => (
+                    <Card key={word.id} props={word} />
+                ))}
+            </div>
         </div>
     )
 }

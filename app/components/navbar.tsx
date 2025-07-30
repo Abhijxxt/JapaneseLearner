@@ -18,7 +18,7 @@ export default function Navbar() {
     },[])
 
     return(
-        <div className="w-[100vw] h-16 flex flex-row justify-between items-center bg-amber-500 py-7 px-48">
+        <div className="w-auto h-16 flex flex-row justify-between items-center bg-amber-500 py-7 px-48">
             <div className="title-container">
                 <h1 className="font-bold"><Link href="/">日本語 Learner</Link></h1>
                 <p className="text-xs">Japanese</p>
