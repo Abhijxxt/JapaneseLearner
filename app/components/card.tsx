@@ -32,7 +32,7 @@ export default function Card({ props } : any) {
             return;
         }
         setSaved(true)
-        checkForSaved()
+        setPreviouslySaved(true)
     }
 
     const checkForSaved = async () => {
