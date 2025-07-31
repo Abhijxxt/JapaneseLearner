@@ -19,8 +19,8 @@ export default function WordlistPage() {
     useEffect(() => { fetchWords() },[])
 
     return(
-        <div className="w-auto bg-gradient-to-b from-[0%] from-amber-500 to-white py-10 px-48">
-            <div className="grid grid-cols-3">
+        <div className="w-auto bg-gradient-to-br from-amber-400 to-amber-200 py-10 px-48">
+            <div className="grid xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1">
                 {words && words.map((word: any) => (
                     <Card key={word.id} props={word} />
                 ))}

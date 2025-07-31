@@ -27,9 +27,10 @@ model Words {
   english String 
   japanese String
   romanji String
+  kanji String?
   image String?
   category String
-  subcategory String
+  subcategory String?
 }
 
 model Saved {
