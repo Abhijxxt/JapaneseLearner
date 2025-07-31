@@ -8,6 +8,8 @@ export default function Card({ props } : any) {
     const [englishView, setEnglishView] = useState(true);
     const [furiganaView, setFuriganaView] = useState(true);
     const [romanjiView, setRoamnjiView] = useState(true);
+    const [kanjiView, setKanjiView] = useState(true);
+
     const [saved, setSaved] = useState(false);
     const [previouslySaved, setPreviouslySaved] = useState(false);
 
@@ -60,7 +62,7 @@ export default function Card({ props } : any) {
     useEffect(() => {checkForSaved()}, [])
 
     return (
-        <div key={props.wid} className="flex flex-col text-black transition-all ease-in-out bg-gradient-to-br from-gray-100 via-amber-50 to-gray-300 w-fit p-4 rounded-md m-10 shadow-xl hover:shadow-md  ">
+        <div key={props.wid} className="flex flex-col text-black transition-all ease-in-out bg-gradient-to-br from-gray-50  to-gray-200 border-[1px] border-slate-400 w-fit p-2 rounded-md m-10 shadow-xl hover:shadow-md  ">
             <div className="mb-4 w-[220px] h-[120px] flex items-center justify-center overflow-hidden">
                 <Image
                     src={props.image}
@@ -94,9 +96,20 @@ export default function Card({ props } : any) {
                     // borderRadius: "0.25rem"
                 }}>Romanji: {props.romanji}</h1>
             </button>
-            <p className="mt-2">Category: {props.category} </p>
-            <div className="flex flex-row justify-between">
-                <p>Sub-category: {props.subcategory} </p>
+            <button className="bg-blue-400 " onClick={() => {setKanjiView(!kanjiView)}}>
+                <h1 style={{
+                    backgroundColor: kanjiView ? "transparent" : "black",
+                    color: kanjiView? "inherit" : "black",
+                    padding: "0.5rem"
+                    // borderRadius: "0.25rem"
+                }}>Kanji: {props.kanji}</h1>
+            </button>
+    
+            <div className="flex flex-row justify-between m-1">
+                <div className="">
+                    <p className="mt-2">{props.category} {props.subcategory == "None" ? "" : `| ${props.subcategory}`} </p>
+                </div>
+                <div className="flex justify-center items-center">
                 {
                     previouslySaved &&
                     <FaCheck/>
@@ -105,7 +118,7 @@ export default function Card({ props } : any) {
                     !previouslySaved &&
                     <button onClick={saveWord} className="bg-amber-500 p-2 transition-all ease-in-out rounded-md shadow-md hover:bg-amber-300"><CiBookmarkPlus className="text-2xl"/></button>
                 }
-                
+                </div>
             </div>
         </div>
     )
