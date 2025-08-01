@@ -7,5 +7,5 @@ export async function POST(request: NextRequest) {
     if(checksaved.length === 0) {
         return NextResponse.json(checksaved, {status: 200})
     }
-    return NextResponse.json(checksaved, {status: 400})
+    return NextResponse.json(checksaved, {status: 300})
 }

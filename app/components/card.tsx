@@ -42,6 +42,7 @@ export default function Card({ props } : any) {
             return;
         }
         const data = JSON.parse(localStorage.getItem('user') || '{}');
+        
         const response = await fetch("/api/checksaved", {
             method: "POST",
             headers: {

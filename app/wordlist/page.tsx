@@ -1,6 +1,8 @@
 'use client'
 import { useEffect, useState } from "react"
 import Card from "../components/card";
+import Link from "next/link";
+import { FaFilter } from "react-icons/fa";
 
 export default function WordlistPage() {
 
@@ -19,11 +21,28 @@ export default function WordlistPage() {
     useEffect(() => { fetchWords() },[])
 
     return(
-        <div className="w-auto bg-gradient-to-br from-amber-400 to-amber-200 py-10 lg:px-48 sm:px-0">
-            <div className="grid xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1">
+        <div className="w-auto bg-gradient-to-br bg-[url(@/public/word_bg.jpg)] bg-cover from-amber-300 via-orange-300 to-amber-600 py-10 lg:px-48 sm:px-0 relative overflow-hidden">
+            {/* Blurred background overlay */}
+            <div className="absolute inset-0 backdrop-blur-sm pointer-events-none z-0"></div>
+            <div className="relative z-10">
+            <div className="flex flex-row w-auto justify-center items-center rounder-md">
+                <div className="bg-slate-200 shadow-md flex flex-row items-center justify-center rounded-md px-5">
+                <div className="p-2">
+                    <FaFilter />
+                </div>
+                <div className="p-2">
+                    <Link href="" className="m-2 hover:underline focus:underline">All</Link> |
+                    <Link href="" className="m-2 hover:underline focus:underline" onClick={() => {console.log("click")}}>Noun</Link> |
+                    <Link href="" className="m-2 hover:underline focus:underline">Adjective</Link> |
+                    <Link href="" className="m-2 hover:underline focus:underline">Verb</Link>
+                </div>
+                </div>
+            </div>
+            <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1">
                 {words && words.map((word: any) => (
-                    <Card key={word.id} props={word} />
+                <Card key={word.id} props={word} />
                 ))}
+            </div>
             </div>
         </div>
     )
