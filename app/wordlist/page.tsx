@@ -18,6 +18,24 @@ export default function WordlistPage() {
         setWords(data);
     }
 
+    const getFilteredWord = async (category: string) => {
+        const response = await fetch("/api/filter", {
+            method: "POST",
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                category
+            })
+        });
+        if(response.status !== 200) {
+            alert("Some error occured while fetching data! Please reload");
+            return;
+        }
+        const data = await response.json();
+        setWords(data);
+    }
+
     useEffect(() => { fetchWords() },[])
 
     return(
@@ -31,10 +49,10 @@ export default function WordlistPage() {
                     <FaFilter />
                 </div>
                 <div className="p-2">
-                    <Link href="" className="m-2 hover:underline focus:underline">All</Link> |
-                    <Link href="" className="m-2 hover:underline focus:underline" onClick={() => {console.log("click")}}>Noun</Link> |
-                    <Link href="" className="m-2 hover:underline focus:underline">Adjective</Link> |
-                    <Link href="" className="m-2 hover:underline focus:underline">Verb</Link>
+                    <Link href="" className="m-2 hover:underline focus:underline" onClick={() => {fetchWords()}}>All</Link> |
+                    <Link href="" className="m-2 hover:underline focus:underline" onClick={() => {getFilteredWord("Noun")}}>Noun</Link> |
+                    <Link href="" className="m-2 hover:underline focus:underline" onClick={() => {getFilteredWord("Adjective")}}>Adjective</Link> |
+                    <Link href="" className="m-2 hover:underline focus:underline" onClick={() => {getFilteredWord("Verb")}}>Verb</Link>
                 </div>
                 </div>
             </div>

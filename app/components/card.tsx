@@ -38,6 +38,7 @@ export default function Card({ props } : any) {
     }
 
     const checkForSaved = async () => {
+        console.log("W")
         if(localStorage.getItem('user') === null) {
             return;
         }
