@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { CiBookmarkPlus} from "react-icons/ci";
 import { FaCheck } from "react-icons/fa";
 export default function Card({ props } : any) {
-
+    console.log("CARD CREATED " + props.english)
     const [englishView, setEnglishView] = useState(true);
     const [furiganaView, setFuriganaView] = useState(true);
     const [romanjiView, setRoamnjiView] = useState(true);
@@ -65,8 +65,8 @@ export default function Card({ props } : any) {
         }
         console.log("Check for Saved stopped running")
     }
-    
-    useEffect(() => {checkForSaved()}, [])
+    checkForSaved()
+    // useEffect(() => {checkForSaved()}, [])
     
     return (
         <div key={props.wid} className="flex flex-col  text-black transition-all ease-in-out bg-gradient-to-br from-gray-50  to-gray-200 border-[1px] border-slate-400 w-fit p-2 rounded-md m-10 shadow-xl hover:shadow-md  ">
