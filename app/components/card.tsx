@@ -11,7 +11,7 @@ export default function Card({ props } : any) {
     const [kanjiView, setKanjiView] = useState(true);
 
     const [saved, setSaved] = useState(false);
-    const [previouslySaved, setPreviouslySaved] = useState(false);
+    // const [previouslySaved, setPreviouslySaved] = useState(false);
 
     const saveWord = async () => {
         if(localStorage.getItem('user') === null) {
@@ -34,16 +34,16 @@ export default function Card({ props } : any) {
             return;
         }
         setSaved(true)
-        setPreviouslySaved(true)
+        // setPreviouslySaved(true)
     }
 
     const checkForSaved = async () => {
-        console.log("W")
+        console.log("Check for Saved started running")
         if(localStorage.getItem('user') === null) {
             return;
         }
         const data = JSON.parse(localStorage.getItem('user') || '{}');
-        
+        console.log(data.uid + ":" + props.wid)
         const response = await fetch("/api/checksaved", {
             method: "POST",
             headers: {
@@ -55,14 +55,19 @@ export default function Card({ props } : any) {
             })
         })
         if(response.status !== 200) {
-            setPreviouslySaved(true)
+            // setPreviouslySaved(true)
+            console.log("Found  " + props.english)
+            setSaved(true)
         } else {
-            setPreviouslySaved(false)
+            // console.log("Not Found  " + props.english)
+            // setPreviouslySaved(false)
+            setSaved(false)
         }
+        console.log("Check for Saved stopped running")
     }
-
+    
     useEffect(() => {checkForSaved()}, [])
-
+    
     return (
         <div key={props.wid} className="flex flex-col  text-black transition-all ease-in-out bg-gradient-to-br from-gray-50  to-gray-200 border-[1px] border-slate-400 w-fit p-2 rounded-md m-10 shadow-xl hover:shadow-md  ">
             <div className="mb-4 w-[220px] h-[120px] flex items-center justify-center overflow-hidden">
@@ -112,11 +117,11 @@ export default function Card({ props } : any) {
                 </div>
                 <div className="flex justify-center items-center">
                 {
-                    previouslySaved &&
+                    saved &&
                     <FaCheck/>
                 }
                 {
-                    !previouslySaved &&
+                    !saved &&
                     <button onClick={saveWord} className="bg-amber-500 p-2 transition-all ease-in-out rounded-md shadow-md hover:bg-amber-300"><CiBookmarkPlus className="text-2xl"/></button>
                 }
                 </div>
