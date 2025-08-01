@@ -30,7 +30,7 @@ model Words {
   kanji String?
   image String?
   category String
-  subcategory String?
+  subcategory String? @default("None")
 }
 
 model Saved {

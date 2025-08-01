@@ -63,10 +63,10 @@ export default function Card({ props } : any) {
     useEffect(() => {checkForSaved()}, [])
 
     return (
-        <div key={props.wid} className="flex flex-col text-black transition-all ease-in-out bg-gradient-to-br from-gray-50  to-gray-200 border-[1px] border-slate-400 w-fit p-2 rounded-md m-10 shadow-xl hover:shadow-md  ">
+        <div key={props.wid} className="flex flex-col  text-black transition-all ease-in-out bg-gradient-to-br from-gray-50  to-gray-200 border-[1px] border-slate-400 w-fit p-2 rounded-md m-10 shadow-xl hover:shadow-md  ">
             <div className="mb-4 w-[220px] h-[120px] flex items-center justify-center overflow-hidden">
                 <Image
-                    src={props.image}
+                    src={props.image !== "" ? props.image : "https://images.pexels.com/photos/28216688/pexels-photo-28216688.png"}
                     alt={props.english}
                     width={200}
                     height={120}
@@ -105,7 +105,6 @@ export default function Card({ props } : any) {
                     // borderRadius: "0.25rem"
                 }}>Kanji: {props.kanji}</h1>
             </button>
-    
             <div className="flex flex-row justify-between m-1">
                 <div className="">
                     <p className="mt-2">{props.category} {props.subcategory == "None" ? "" : `| ${props.subcategory}`} </p>
