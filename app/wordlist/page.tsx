@@ -5,6 +5,7 @@ import Link from "next/link";
 import { FaFilter } from "react-icons/fa";
 import { HiViewList } from "react-icons/hi";
 import { CiSaveDown2 } from "react-icons/ci";
+import { toast, Toaster } from "sonner";
 
 export default function WordlistPage() {
 
@@ -33,7 +34,7 @@ export default function WordlistPage() {
             })
         });
         if(response.status !== 200) {
-            alert("Some error occured while fetching data! Please reload");
+            toast.error("Some error occured while fetching data! Please reload");
             return;
         }
         const data = await response.json();
@@ -63,7 +64,7 @@ export default function WordlistPage() {
     useEffect(() => { fetchWords() },[])
 
     return(
-        <div className="w-auto min-h-[100vh] bg-gradient-to-br bg-[url(@/public/word_bg.jpg)] bg-cover from-amber-300 via-orange-300 to-amber-600 py-10 lg:px-48 sm:px-0 relative overflow-hidden">
+        <div className="w-auto min-h-[100vh] bg-gradient-to-br bg-[url(@/public/word_bg.webp)] bg-cover from-amber-300 via-orange-300 to-amber-600 py-10 lg:px-48 sm:px-0 relative overflow-hidden">
             {/* Blurred background overlay */}
             <div className="absolute inset-0 backdrop-blur-sm pointer-events-none z-0"></div>
             <div className="relative z-10">
