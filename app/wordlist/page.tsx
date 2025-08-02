@@ -3,12 +3,16 @@ import { useEffect, useState } from "react"
 import Card from "../components/card";
 import Link from "next/link";
 import { FaFilter } from "react-icons/fa";
+import { PiListFill } from "react-icons/pi";
+import { CiSaveDown2 } from "react-icons/ci";
 
 export default function WordlistPage() {
 
     const [words, setWords] = useState([]);
+    const [savedPage, setSavedPage] = useState(false);
 
     const fetchWords = async () => {
+        setSavedPage(false);
         const response = await fetch("/api/wordlist");
         if(response.status !== 200) {
             alert("Some error occured while fetching data! Please reload");
@@ -36,6 +40,26 @@ export default function WordlistPage() {
         setWords(data);
     }
 
+    const savedWords = async () => {
+        setSavedPage(true);
+        const data = JSON.parse(localStorage.getItem('user') || '{}');
+        const response = await fetch("/api/savedwords", {
+            method: "POST",
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                uid: data.uid
+            })
+        })
+        if(response.status !== 200) {
+            alert("Failed to fetch saved words")
+        } else {
+            const data = await response.json()
+            setWords(data)
+        }
+    }
+
     useEffect(() => { fetchWords() },[])
 
     return(
@@ -49,16 +73,21 @@ export default function WordlistPage() {
                     <FaFilter />
                 </div>
                 <div className="p-2">
-                    <Link href="" className="m-2 hover:underline focus:underline" onClick={() => {fetchWords()}}>All</Link> |
+                    {/* <Link href="" className="m-2 hover:underline focus:underline" onClick={() => {fetchWords()}}>All</Link> | */}
                     <Link href="" className="m-2 hover:underline focus:underline" onClick={() => {getFilteredWord("Noun")}}>Noun</Link> |
                     <Link href="" className="m-2 hover:underline focus:underline" onClick={() => {getFilteredWord("Adjective")}}>Adjective</Link> |
                     <Link href="" className="m-2 hover:underline focus:underline" onClick={() => {getFilteredWord("Verb")}}>Verb</Link>
                 </div>
                 </div>
             </div>
+                <div className="fixed bg-slate-100 p-2 rounded-md text-2xl top-24 right-10 z-20 flex flex-col items-center space-y-2">
+                    <div className="border-b-2 border-amber-900"><button className="hover:cursor-pointer" onClick={fetchWords}><PiListFill /></button></div>
+                    <div className=""><button className="hover:cursor-pointer" onClick={savedWords}><CiSaveDown2 /></button></div>
+                    
+                </div>
             <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1">
                 {words && words.map((word: any) => (
-                <Card key={word.id} props={word} />
+                <Card key={word.id} props={word} saved={savedPage} />
                 ))}
             </div>
             </div>
