@@ -14,3 +14,18 @@ export async function POST(request: NextRequest) {
     }
     return NextResponse.json(saveWord, {status: 200})
 }
+
+export async function DELETE(request: NextRequest) {
+    const {uid, wid} = await request.json();
+    const deleteResult = await prisma.saved.deleteMany({
+        where: {
+            uid: uid,
+            wid: wid
+        }
+    });
+    if (deleteResult.count === 0) {
+        return NextResponse.json({ message: "No record deleted" }, { status: 400 });
+    } else {
+        return NextResponse.json(deleteResult, { status: 200 });
+    }
+}

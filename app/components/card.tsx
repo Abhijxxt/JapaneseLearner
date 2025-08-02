@@ -3,14 +3,18 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { CiBookmarkPlus} from "react-icons/ci";
 import { FaCheck } from "react-icons/fa";
-export default function Card({ props, saved: savedProp }: any) {
-    console.log(savedProp);
+import { IoIosRemoveCircle } from "react-icons/io";
+
+export default function Card({ props, savedPageStatus }: any) {
+    
     const [englishView, setEnglishView] = useState(true);
     const [furiganaView, setFuriganaView] = useState(true);
     const [romanjiView, setRoamnjiView] = useState(true);
     const [kanjiView, setKanjiView] = useState(true);
 
-    const [saved, setSaved] = useState(savedProp ?? false);
+    const [saved, setSaved] = useState(false);
+
+    const [display, setDisplay] = useState(true);
 
     const saveWord = async () => {
         if(localStorage.getItem('user') === null) {
@@ -56,14 +60,36 @@ export default function Card({ props, saved: savedProp }: any) {
             setSaved(false)
         }
     }
+
+    const deleteWord = async () => {
+        const data = JSON.parse(localStorage.getItem('user') || '{}');
+        const response = await fetch("api/save", {
+            method: "DELETE",
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                uid: data.uid,
+                wid: props.wid
+            })
+        })
+        if(response.status !== 200) {
+            alert("Unable to delete word. Try again")
+        } else {
+            // alert("Deleted Successfully")
+            setDisplay(false);
+        }
+
+    }
+
     checkForSaved()
     useEffect(() => {
         // checkForSaved()
-        
     }, [])
     
     return (
-        <div key={props.wid} className="flex flex-col  text-black transition-all ease-in-out bg-gradient-to-br from-gray-50  to-gray-200 border-[1px] border-slate-400 w-fit p-2 rounded-md m-10 shadow-xl hover:shadow-md  ">
+        <div key={props.wid} className="flex flex-col text-black transition-all ease-in-out bg-gradient-to-br from-gray-50  to-gray-200 border-[1px] border-slate-400 w-fit p-2 rounded-md m-10 shadow-xl hover:shadow-md  "
+            style={display ? {}: {display: "none"}}    >
             <div className="mb-4 w-[220px] h-[120px] flex items-center justify-center overflow-hidden">
                 <Image
                     src={props.image !== "" ? props.image : "https://images.pexels.com/photos/28216688/pexels-photo-28216688.png"}
@@ -107,12 +133,16 @@ export default function Card({ props, saved: savedProp }: any) {
                 </div>
                 <div className="flex justify-center items-center">
                 {
-                    saved &&
+                    saved && !savedPageStatus &&
                     <FaCheck/>
                 }
                 {
                     !saved &&
                     <button onClick={saveWord} className="bg-amber-500 p-2 transition-all ease-in-out rounded-md shadow-md hover:bg-amber-300"><CiBookmarkPlus className="text-2xl"/></button>
+                } 
+                {
+                    savedPageStatus &&
+                    <button onClick={deleteWord} className="text-2xl hover:cursor-pointer"><IoIosRemoveCircle /></button>
                 }
                 </div>
             </div>
