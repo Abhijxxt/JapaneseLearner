@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import Card from "../components/card";
 import Link from "next/link";
 import { FaFilter } from "react-icons/fa";
-import { PiListFill } from "react-icons/pi";
+import { HiViewList } from "react-icons/hi";
 import { CiSaveDown2 } from "react-icons/ci";
 
 export default function WordlistPage() {
@@ -81,7 +81,7 @@ export default function WordlistPage() {
                 </div>
             </div>
                 <div className="fixed bg-slate-100 p-2 rounded-md text-2xl top-24 right-10 z-20 flex flex-col items-center space-y-2">
-                    <div className="border-b-2 border-amber-900"><button className="hover:cursor-pointer" onClick={fetchWords}><PiListFill /></button></div>
+                    <div className="border-b-2 border-amber-900"><button className="hover:cursor-pointer" onClick={fetchWords}><HiViewList /></button></div>
                     <div className=""><button className="hover:cursor-pointer" onClick={savedWords}><CiSaveDown2 /></button></div>
                     
                 </div>
