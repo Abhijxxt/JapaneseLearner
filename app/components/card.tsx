@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { CiBookmarkPlus} from "react-icons/ci";
 import { FaCheck } from "react-icons/fa";
 import { IoIosRemoveCircle } from "react-icons/io";
+import { toast } from "sonner";
 
 export default function Card({ props, savedPageStatus }: any) {
     
@@ -37,6 +38,7 @@ export default function Card({ props, savedPageStatus }: any) {
             return;
         }
         setSaved(true)
+        toast.success("Word saved!")
     }
 
     const checkForSaved = async () => {
@@ -77,6 +79,7 @@ export default function Card({ props, savedPageStatus }: any) {
             alert("Unable to delete word. Try again")
         } else {
             // alert("Deleted Successfully")
+            toast.warning("Word unsaved!")
             setDisplay(false);
         }
 
