@@ -26,7 +26,8 @@ export default function Navbar() {
             <div className="links-and-account-container flex flex-row justify-between items-center">
                 <div className="links-container mx-20">
                     <Link href="/home" className="p-2 hover:underline">Home</Link>
-                    <Link href="/wordlist" className="p-2 hover:underline">Word List</Link>
+                    <Link href="/wordlist" className="p-2 hover:underline">Words</Link>
+                    <Link href="/test" className="p-2 hover:underline">Test</Link>
                 </div>
                 <div className="account-container">
                     <Link href="/login" className="p-1 font-bold">Login</Link>/
