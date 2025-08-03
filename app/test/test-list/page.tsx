@@ -1,7 +1,67 @@
+'use client'
+import { QuestionBox } from "@/app/components/question";
+import { useSearchParams } from "next/navigation"
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
 export default function TestListPage() {
+    const searchParams = useSearchParams();
+    const savedList = searchParams.get('savedList');
+    // console.log(props.savedList)
+
+    const [words, setWords] = useState([])
+    const [questionNumber, setQuestionNumber] = useState(0)
+    let question : any = "";
+
+    const fetchSavedWordsList = async () => {
+        const user = JSON.parse(localStorage.getItem('user') || '{}');
+        const response = await fetch("/api/savedwords", {
+            method: "POST",
+            headers: {
+                'Content-type': 'application/json'
+            }, 
+            body: JSON.stringify({
+                uid: user.uid
+            })
+        })
+        if(response.status !== 200) {
+            toast.error("There was an error loading page")
+            return;
+        }
+        const data = await response.json();
+        setWords(data)
+    }
+
+    const fetchRandomWordsList = async () => {
+
+    }
+
+    const nextQuestion = () => {
+        if(questionNumber < words.length-1) {
+            setQuestionNumber(questionNumber+1);
+        } else {
+            toast.success("LIST COMPLETE")
+        }
+    }
+
+    useEffect(() => {
+        if(searchParams) {
+            fetchSavedWordsList();
+        } else {
+            fetchRandomWordsList();
+        }
+    },[])
+
+
+    if(words.length > 0) {
+        question = words[questionNumber];
+    }
+
     return(
-        <div>
-            TEST LIST
+        <div className="bg-[url('@/public/test-background.jpg')] min-h-[100vh] overflow-hidden bg-cover bg-no-repeat
+        flex flex-row justify-center items-center">
+            <div>
+                <QuestionBox props={question} questionNumber={questionNumber+1} next={nextQuestion}/> 
+            </div>
         </div>
     )
 }

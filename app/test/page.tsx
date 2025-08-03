@@ -27,7 +27,7 @@ export default function TestPage() {
                                 {backgroundColor: "#7b3306", color: "#ffd230"} : {backgroundColor: "#ffd230"}}
                         >Random Words</button>
                     </div>
-                    <Link href="/test/test-list" className="text-left p-2 w-auto transition ease-in-out bg-amber-400 hover:bg-amber-700 mt-2 flex flex-row items-center justify-between ">Let's go <FaArrowRight /></Link>
+                    <Link href={{pathname:"/test/test-list", query: {savedList: savedWordsList}}} className="text-left p-2 w-auto transition ease-in-out bg-amber-400 hover:bg-amber-700 mt-2 flex flex-row items-center justify-between ">Let's go <FaArrowRight /></Link>
                     <p className="text-xs">By default saved list will be selected</p>
                 </div>
             </div>
