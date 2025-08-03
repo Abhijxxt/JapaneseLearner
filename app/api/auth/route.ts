@@ -10,7 +10,7 @@ import { prisma } from "@/prisma/client";
 
 export async function POST(request: NextRequest) {
     const {email, password}= await request.json()
-    console.log(email + " : " + password);
+    // console.log(email + " : " + password);
     const validateUser = await prisma.user.findUnique({
         where: {
             email: email,

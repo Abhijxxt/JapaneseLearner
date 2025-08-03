@@ -8,8 +8,9 @@ export async function POST(request : NextRequest) {
             email: email,
         }
     })
+    // console.log(checkUserPreviousLog);
     if(checkUserPreviousLog) {
-       return NextResponse.json(checkUserPreviousLog, {status: 400}) 
+       return NextResponse.json(checkUserPreviousLog, {status: 300}) 
     }
     const createUser = await prisma.user.create({
         data: {
@@ -20,7 +21,7 @@ export async function POST(request : NextRequest) {
         }
     })
     if(!createUser) {
-        return NextResponse.json(createUser, {status: 400})
+        return NextResponse.json(createUser, {status: 500})
     }
     return NextResponse.json(createUser, {status: 200})
 }

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { FaFilter } from "react-icons/fa";
 import { HiViewList } from "react-icons/hi";
 import { CiSaveDown2 } from "react-icons/ci";
-import { toast, Toaster } from "sonner";
+import { toast } from "sonner";
 
 export default function WordlistPage() {
 
