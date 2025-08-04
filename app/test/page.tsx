@@ -4,7 +4,7 @@ import { useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
 
 export default function TestPage() {
-    const [savedWordsList, setSavedWordsList] = useState(true);
+    const [savedWordsList, setSavedWordsList] = useState<boolean>(true);
 
     return(
         <div className="min-h-[90vh] bg-[url('@/public/test_page_landing_page.jpg')] flex flex-row items-center">
