@@ -5,10 +5,27 @@ import { FaArrowCircleRight } from "react-icons/fa"
 import { toast } from "sonner"
 import AnswerBox from "./answerBox";
 
-export function QuestionBox({props, questionNumber, next}:any) {
+export function QuestionBox({props, questionNumber, next, saved}:any) {
 
     const [answerBoxView, setAnswerBoxView] = useState<boolean>(false);
     const [score, setScore] = useState<number>(0);
+
+    const updateProficiency = async (score: number) => {
+        if(saved !== "true") return; // If not saved, do not update proficiency
+        const user = JSON.parse(localStorage.getItem('user') || '{}');
+        if(!user.uid || !props.wid) return; // Ensure user and word ID are available
+        const response = await fetch("/api/updateproficiency", {
+            method: "POST",
+            headers: {
+                'Content-type': 'application/json'
+            }, 
+            body: JSON.stringify({
+                uid: user.uid,
+                wid: props.wid,
+                proficiency: score == 1 ? 10 : -5
+            })
+        })
+    }
 
     const checkAnswer = async (event: any) => {
         event.preventDefault()
@@ -16,15 +33,17 @@ export function QuestionBox({props, questionNumber, next}:any) {
             toast.warning("Please type your answer")
             return;
         }
-        if(props.japanese === event.target[0].value) {
+        if(props.japanese === event.target[0].value || props.kanji === event.target[0].value) {
             setScore(1);
             toast.success("Correct")
+            updateProficiency(1);
             setTimeout(() => {
                 event.target[0].value = ""
             }, 1000)
         } else {
             setScore(0);
             toast.error("Wrong!")
+            updateProficiency(0);
             setTimeout(() => {
                 event.target[0].value = ""
             }, 1000)

@@ -142,8 +142,7 @@ export default function Card({ props, savedPageStatus }: any) {
                 {
                     !saved &&
                     <button onClick={saveWord} className="bg-amber-500 p-2 transition-all ease-in-out rounded-md shadow-md hover:bg-amber-300"><CiBookmarkPlus className="text-2xl"/></button>
-                } 
-                {
+                    ||
                     savedPageStatus &&
                     <button onClick={deleteWord} className="text-2xl hover:cursor-pointer"><IoIosRemoveCircle /></button>
                 }
