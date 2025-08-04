@@ -46,7 +46,7 @@ export default function TestListPage() {
     }
 
     const nextQuestion = (score: number) => {
-        const newScore = totalScore + score;
+        const newScore : number = totalScore + score;
         console.log(newScore)
         setTotalScore(newScore);
         if(questionNumber < words.length-1) {

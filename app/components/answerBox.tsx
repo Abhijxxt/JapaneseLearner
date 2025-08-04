@@ -1,6 +1,6 @@
 export default function AnswerBox({props, next}: any) {
     return(
-        <div className="bg-amber-400 flex flex-row justify-center items-center py-4 px-2">
+        <div className="bg-amber-100 py-4 px-2">
             <p>Japanese: {props.japanese}</p>
             <p>Romanji: {props.romanji}</p>
             <p>Kanji: {props.kanji}</p>
