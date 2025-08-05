@@ -6,6 +6,7 @@ import { FaCheck } from "react-icons/fa";
 import { IoIosRemoveCircle } from "react-icons/io";
 import { toast } from "sonner";
 import { checkLogin, getUserId } from "../middleware/checkLogin";
+import Link from "next/link";
 
 export default function Card({ props, savedPageStatus }: any) {
     
@@ -149,6 +150,7 @@ export default function Card({ props, savedPageStatus }: any) {
                 }
                 </div>
             </div>
+                <Link className="text-xs" href={`https://jisho.org/search/${props.japanese}`}>Click for more</Link>
         </div>
     )
 }
