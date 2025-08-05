@@ -2,6 +2,16 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { FaArrowDown } from "react-icons/fa";
+
 export default function Navbar() {
     
     const [user, setUser] : any = useState({});
@@ -16,6 +26,13 @@ export default function Navbar() {
             return;
         }
         setLoggedIn(false);
+    }
+
+    const logout = () => {
+        localStorage.removeItem('user');
+        setUser({});
+        setLoggedIn(false);
+        // window.location.href = '/login';
     }
 
     useEffect(() => {
@@ -67,8 +84,20 @@ export default function Navbar() {
                     </div>
                 }
                 {   loggedIn &&
-                    <div>
+                    <div className="flex flex-row justify-between items-center">
                         <p>{user.firstname}</p>
+                        <div className="ml-2 flex flex-row justify-center items-center outline-none">
+                            <DropdownMenu>
+                            <DropdownMenuTrigger className="p-1 bg-amber-800 text-white rounded-full"> <FaArrowDown /></DropdownMenuTrigger>
+                            <DropdownMenuContent>
+                                <DropdownMenuLabel>{user.firstname} {user.lastname}</DropdownMenuLabel>
+                                <DropdownMenuSeparator />
+                                <DropdownMenuItem>Profile</DropdownMenuItem>
+                                <DropdownMenuItem onClick={logout}>Log Out</DropdownMenuItem>
+                                <DropdownMenuItem>Bug Report</DropdownMenuItem>
+                            </DropdownMenuContent>
+                            </DropdownMenu>
+                        </div>
                     </div>
                 }
             </div>
