@@ -1,11 +1,13 @@
 'use client'
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
+import { checkLogin } from "../middleware/checkLogin";
 
 export default function TestPage() {
-    const [savedWordsList, setSavedWordsList] = useState<boolean>(true);
-
+    const isLoggedIn = checkLogin();
+    const [savedWordsList, setSavedWordsList] = useState<boolean>(isLoggedIn);
+    console.log(isLoggedIn)
     return(
         <div className="min-h-[90vh] bg-[url('@/public/test_page_landing_page.jpg')] flex flex-row items-center">
             <div className="px-18">
@@ -20,7 +22,8 @@ export default function TestPage() {
                             onClick={() => {setSavedWordsList(true)}}
                             style={savedWordsList ? 
                                 {backgroundColor: "#7b3306", color: "#fee685"} : {backgroundColor: "#fee685"}}
-                        >Saved Words</button>
+                            disabled={!isLoggedIn}
+                            >Saved Words</button>
                         <button className="text-left w-[50%] p-2 transition ease-in-out bg-amber-300 hover:bg-amber-500"
                             onClick={() => {setSavedWordsList(false)}}
                             style={!savedWordsList ? 

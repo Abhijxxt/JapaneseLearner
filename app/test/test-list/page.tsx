@@ -32,6 +32,12 @@ export default function TestListPage() {
             return;
         }
         const data = await response.json();
+        if(data.length === 0) {
+            toast.error("You have no saved words")
+            router.push("/test/test-list/completed?score=0&&total=0");
+            return;
+            
+        }
         setWords(data)
     }
 

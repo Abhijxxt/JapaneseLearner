@@ -19,6 +19,10 @@ export default function CompletionPage() {
 
     useEffect(() => {
         if (score != null && total != null) {
+            if(score == '0' && total == '0') {
+                setPrintMessage("You have no words to test");
+                return;
+            }
             const percentage = (Number(score) / Number(total)) * 100;
             let message = "";
             if (percentage === 100) {
