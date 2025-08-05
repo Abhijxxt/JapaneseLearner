@@ -1,5 +1,6 @@
 'use client'
 import { QuestionBox } from "@/app/components/question";
+import { getUserId } from "@/app/middleware/checkLogin";
 import { useSearchParams } from "next/navigation"
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -17,14 +18,14 @@ export default function TestListPage() {
     const [totalScore, setTotalScore] = useState(0);
 
     const fetchSavedWordsList = async () => {
-        const user = JSON.parse(localStorage.getItem('user') || '{}');
+        const uid = getUserId();
         const response = await fetch("/api/savedwords", {
             method: "POST",
             headers: {
                 'Content-type': 'application/json'
             }, 
             body: JSON.stringify({
-                uid: user.uid
+                uid: uid
             })
         })
         if(response.status !== 200) {

@@ -6,6 +6,7 @@ import { FaFilter } from "react-icons/fa";
 import { HiViewList } from "react-icons/hi";
 import { CiSaveDown2 } from "react-icons/ci";
 import { toast } from "sonner";
+import { checkLogin } from "../middleware/checkLogin";
 
 export default function WordlistPage() {
 
@@ -42,6 +43,10 @@ export default function WordlistPage() {
     }
 
     const savedWords = async () => {
+        if(!checkLogin()) {
+            toast.error("Please login to view saved words");
+            return;
+        }
         setSavedPage(true);
         const data = JSON.parse(localStorage.getItem('user') || '{}');
         const response = await fetch("/api/savedwords", {

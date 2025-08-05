@@ -1,13 +1,13 @@
 'use client'
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
 import { checkLogin } from "../middleware/checkLogin";
 
 export default function TestPage() {
     const isLoggedIn = checkLogin();
     const [savedWordsList, setSavedWordsList] = useState<boolean>(isLoggedIn);
-    console.log(isLoggedIn)
+    
     return(
         <div className="min-h-[90vh] bg-[url('@/public/test_page_landing_page.jpg')] flex flex-row items-center">
             <div className="px-18">

@@ -5,6 +5,7 @@ import { CiBookmarkPlus} from "react-icons/ci";
 import { FaCheck } from "react-icons/fa";
 import { IoIosRemoveCircle } from "react-icons/io";
 import { toast } from "sonner";
+import { checkLogin, getUserId } from "../middleware/checkLogin";
 
 export default function Card({ props, savedPageStatus }: any) {
     
@@ -18,11 +19,11 @@ export default function Card({ props, savedPageStatus }: any) {
     const [display, setDisplay] = useState(true);
 
     const saveWord = async () => {
-        if(localStorage.getItem('user') === null) {
-            alert("Please sign in first!");
+        if(!checkLogin()) {
+            toast.warning("Please sign in first!");
             return;
         }
-        const data = JSON.parse(localStorage.getItem('user') || '{}');
+        const uid = getUserId();
         const response = await fetch("/api/save", {
             method: "POST",
             headers: {
@@ -30,7 +31,7 @@ export default function Card({ props, savedPageStatus }: any) {
             },
             body: JSON.stringify({
                 wid: props.wid,
-                uid: data.uid
+                uid: uid
             })
         })
         if(response.status !== 200) {
@@ -42,17 +43,17 @@ export default function Card({ props, savedPageStatus }: any) {
     }
 
     const checkForSaved = async () => {
-        if(localStorage.getItem('user') === null) {
+        if(!checkLogin()) {
             return;
         }
-        const data = JSON.parse(localStorage.getItem('user') || '{}');
+        const uid = getUserId();
         const response = await fetch("/api/checksaved", {
             method: "POST",
             headers: {
                 'Content-type': 'application/json'
             },
             body: JSON.stringify({
-                uid: data.uid,
+                uid: uid,
                 wid: props.wid
             })
         })
@@ -64,14 +65,14 @@ export default function Card({ props, savedPageStatus }: any) {
     }
 
     const deleteWord = async () => {
-        const data = JSON.parse(localStorage.getItem('user') || '{}');
+        const uid = getUserId();
         const response = await fetch("api/save", {
             method: "DELETE",
             headers: {
                 'Content-type': 'application/json'
             },
             body: JSON.stringify({
-                uid: data.uid,
+                uid: uid,
                 wid: props.wid
             })
         })
