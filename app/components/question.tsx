@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { FaArrowCircleRight } from "react-icons/fa"
 import { toast } from "sonner"
 import AnswerBox from "./answerBox";
+import { getUserId } from "../middleware/checkLogin";
 
 export function QuestionBox({props, questionNumber, next, saved}:any) {
 
@@ -12,15 +13,15 @@ export function QuestionBox({props, questionNumber, next, saved}:any) {
 
     const updateProficiency = async (score: number) => {
         if(saved !== "true") return; // If not saved, do not update proficiency
-        const user = JSON.parse(localStorage.getItem('user') || '{}');
-        if(!user.uid || !props.wid) return; // Ensure user and word ID are available
+        const uid = getUserId();
+        if(!uid || !props.wid) return; // Ensure user and word ID are available
         const response = await fetch("/api/updateproficiency", {
             method: "POST",
             headers: {
                 'Content-type': 'application/json'
             }, 
             body: JSON.stringify({
-                uid: user.uid,
+                uid: uid,
                 wid: props.wid,
                 proficiency: score == 1 ? 10 : -5
             })

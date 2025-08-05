@@ -6,7 +6,7 @@ import { FaFilter } from "react-icons/fa";
 import { HiViewList } from "react-icons/hi";
 import { CiSaveDown2 } from "react-icons/ci";
 import { toast } from "sonner";
-import { checkLogin } from "../middleware/checkLogin";
+import { checkLogin, getUserId } from "../middleware/checkLogin";
 
 export default function WordlistPage() {
 
@@ -48,14 +48,14 @@ export default function WordlistPage() {
             return;
         }
         setSavedPage(true);
-        const data = JSON.parse(localStorage.getItem('user') || '{}');
+        const uid = getUserId();
         const response = await fetch("/api/savedwords", {
             method: "POST",
             headers: {
                 'Content-type': 'application/json'
             },
             body: JSON.stringify({
-                uid: data.uid
+                uid: uid
             })
         })
         if(response.status !== 200) {
@@ -66,7 +66,10 @@ export default function WordlistPage() {
         }
     }
 
-    useEffect(() => { fetchWords() },[])
+    useEffect(() => { 
+        fetchWords() 
+        toast.info("Click on some word to tape it")
+    },[])
 
     return(
         <div className="w-auto min-h-[100vh] bg-gradient-to-br bg-[url(@/public/word_bg.webp)] bg-cover from-amber-300 via-orange-300 to-amber-600 py-10 lg:px-48 sm:px-0 relative overflow-hidden">
