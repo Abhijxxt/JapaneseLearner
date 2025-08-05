@@ -15,6 +15,30 @@ export default function Navbar() {
 
     useEffect(() => {
         loadUser();
+        // Listen for localStorage changes from other tabs
+        const handleStorage = (event: StorageEvent) => {
+            if (event.key === 'user') {
+                loadUser();
+            }
+        };
+        window.addEventListener('storage', handleStorage);
+
+        // Monkey-patch localStorage.setItem to also trigger loadUser in this tab
+        const originalSetItem = localStorage.setItem;
+        localStorage.setItem = function(key, value) {
+            originalSetItem.apply(this, [key, value]);
+            if (key === 'user') {
+                window.dispatchEvent(new Event('user-localstorage-changed'));
+            }
+        };
+        const handleCustom = () => loadUser();
+        window.addEventListener('user-localstorage-changed', handleCustom);
+
+        return () => {
+            window.removeEventListener('storage', handleStorage);
+            window.removeEventListener('user-localstorage-changed', handleCustom);
+            localStorage.setItem = originalSetItem;
+        };
     },[])
 
     return(
