@@ -150,7 +150,7 @@ export default function Card({ props, savedPageStatus }: any) {
                 }
                 </div>
             </div>
-                <Link className="text-xs" href={`https://jisho.org/search/${props.japanese}`}>Click for more</Link>
+                <Link className="text-sm mt-2 text-blue-800" target="_blank" href={`https://jisho.org/search/${props.japanese}`}>Click for more</Link>
         </div>
     )
 }
