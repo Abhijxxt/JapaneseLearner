@@ -66,7 +66,7 @@ export default function Card({ props, savedPageStatus }: any) {
 
     const deleteWord = async () => {
         const uid = getUserId();
-        const response = await fetch("api/save", {
+        const response = await fetch("/api/save", {
             method: "DELETE",
             headers: {
                 'Content-type': 'application/json'
