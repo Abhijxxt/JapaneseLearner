@@ -4,16 +4,22 @@ import { useEffect, useState } from "react";
 
 export default function Navbar() {
     
-    const [user, setUser] : any = useState([]);
+    const [user, setUser] : any = useState({});
+    const [loggedIn, setLoggedIn] = useState(false);
 
     const loadUser = () => {
         const data = JSON.parse(localStorage.getItem('user') || '{}');
-        if(data != null) {
+
+        if(Object.keys(data).length != 0) {
             setUser(data); 
+            setLoggedIn(true);
+            return;
         }
+        setLoggedIn(false);
     }
 
     useEffect(() => {
+        setLoggedIn(false);
         loadUser();
         // Listen for localStorage changes from other tabs
         const handleStorage = (event: StorageEvent) => {
@@ -40,7 +46,7 @@ export default function Navbar() {
             localStorage.setItem = originalSetItem;
         };
     },[])
-
+    // console.log(user);  
     return(
         <div className="w-auto h-16 flex flex-row justify-between items-center bg-slate-50 py-7 lg:px-48 sm:px-2 shadow-md">
             <div className="title-container">
@@ -53,11 +59,18 @@ export default function Navbar() {
                     <Link href="/wordlist" className="p-2 hover:underline">Words</Link>
                     <Link href="/test" className="p-2 hover:underline">Test</Link>
                 </div>
-                <div className="account-container">
-                    <Link href="/login" className="p-1 font-bold">Login</Link>/
-                    <Link href="/signup" className="p-1">Signup</Link>
-                    <p>{user.firstname}</p>
-                </div>
+                {
+                    !loggedIn &&
+                    <div className="account-container">
+                        <Link href="/login" className="p-1 font-bold">Login</Link>/
+                        <Link href="/signup" className="p-1">Signup</Link>
+                    </div>
+                }
+                {   loggedIn &&
+                    <div>
+                        <p>{user.firstname}</p>
+                    </div>
+                }
             </div>
         </div>
     )
