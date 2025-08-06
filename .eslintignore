@@ -1,1 +1,27 @@
+# Build output
+.next/
+out/
+dist/
+
+# Node modules
+node_modules/
+
+# Prisma generated files (e.g., client.js)
+prisma/generated/
 app/generated/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Public assets
+public/
+
+# Shadcn-generated UI components (optional, see notes below)
+components/ui/
+
+# ESLint/Prettier configs (if JS/TS used)
+*.config.js
+*.config.ts
+*.config.cjs
+*.config.mjs
+
