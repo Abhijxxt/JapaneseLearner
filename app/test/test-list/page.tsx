@@ -78,7 +78,7 @@ export default function TestListPage() {
     }
 
     return(
-        <div className="bg-[url('@/public/test-background.jpg')] min-h-[100vh] overflow-hidden bg-cover bg-no-repeat
+        <div className="bg-[url('/test-background.jpg')] min-h-[100vh] overflow-hidden bg-cover bg-no-repeat
         flex flex-row justify-center items-center ">
             <div>
                 <QuestionBox props={question} questionNumber={questionNumber+1} next={nextQuestion} saved={savedList}/> 
