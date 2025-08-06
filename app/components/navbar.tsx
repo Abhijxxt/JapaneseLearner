@@ -11,11 +11,14 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { FaArrowDown } from "react-icons/fa";
-
+import { useRouter } from "next/navigation";
 export default function Navbar() {
     
+    const router = useRouter();
+
     const [user, setUser] : any = useState({});
     const [loggedIn, setLoggedIn] = useState(false);
+    // const [profileDialogOpen, setProfileDialogOpen] = useState(false);
 
     const loadUser = () => {
         const data = JSON.parse(localStorage.getItem('user') || '{}');
@@ -33,6 +36,12 @@ export default function Navbar() {
         setUser({});
         setLoggedIn(false);
         // window.location.href = '/login';
+    }
+
+    const openProfileDialog = () => {
+        // setProfileDialogOpen(true);
+        // console.log("Profile Dialog Opened");
+        router.push(`/profile`);
     }
 
     useEffect(() => {
@@ -92,7 +101,7 @@ export default function Navbar() {
                             <DropdownMenuContent>
                                 <DropdownMenuLabel>{user.firstname} {user.lastname}</DropdownMenuLabel>
                                 <DropdownMenuSeparator />
-                                <DropdownMenuItem>Profile</DropdownMenuItem>
+                                <DropdownMenuItem onClick={openProfileDialog}>Profile</DropdownMenuItem>
                                 <DropdownMenuItem onClick={logout}>Log Out</DropdownMenuItem>
                                 <DropdownMenuItem>Bug Report</DropdownMenuItem>
                             </DropdownMenuContent>
