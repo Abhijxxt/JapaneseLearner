@@ -39,3 +39,13 @@ model Saved {
   proficiency Float @default(0)
   @@id([uid,wid])
 }
+
+model BugReport {
+  bid Int @id @default(autoincrement())
+  uid Int
+  title String
+  description String? @db.Text
+  status String @default("open")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
