@@ -13,7 +13,7 @@ import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
-import { getUserId } from "../middleware/checkLogin";
+import { checkLogin, getUserId } from "../middleware/checkLogin";
 import { FaCircleNotch, FaQuestion, FaTruckLoading } from "react-icons/fa";
 
 export default function BugReportPage() {
@@ -27,7 +27,11 @@ export default function BugReportPage() {
             toast.warning("Please fill in both fields");
             return;
         }
-        setLoading(true);
+        if(!checkLogin()) {
+            toast.error("You must be logged in to send a bug report.");
+            return;
+        }
+         setLoading(true);
         const uid = getUserId();
         const response = await fetch('/api/bugreport', {
             method: 'POST',
