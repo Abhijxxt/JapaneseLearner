@@ -1,5 +1,5 @@
+'use client';
 export function checkLogin() {
-    'use client';
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     if (!user || !user.uid) {
         return false;
@@ -7,7 +7,6 @@ export function checkLogin() {
         return true;
     }
 }
-'use server';
 export function redirectIfNotLoggedIn() {
     if (!checkLogin()) {
         window.location.href = "/login";
