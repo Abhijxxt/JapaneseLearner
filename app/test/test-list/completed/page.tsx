@@ -39,7 +39,7 @@ export default function CompletionPage() {
     }, [])
 
     return(
-        <div className="w-[100vw] h-[90vh] bg-[url('public/complete-test-bg.jpg')] bg-cover bg-no-repeat flex flex-col justify-center items-center">
+        <div className="w-[100vw] h-[90vh] bg-[url('/complete-test-bg.jpg')] bg-cover bg-no-repeat flex flex-col justify-center items-center">
             <div className="backdrop-blur-xs bg-white/80 rounded-xl p-8 shadow-lg">
                 <p className="text-3xl font-bold bg-gradient-to-r from-amber-700 to-amber-800 bg-clip-text text-transparent">Correct answers: {score}/{total}</p>
                 <p className="text-center mt-1 text-xl">{printMessage}</p>
