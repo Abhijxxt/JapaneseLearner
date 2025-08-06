@@ -19,7 +19,7 @@ export default function Homepage() {
     return(
         <div className="bg-gradient-to-r from-amber-200 via-amber-300 to-amber-500 min-h-[90vh] flex flex-row items-center justify-center">
             <div className="w-[50%] h-[90vh] flex justify-center items-center">
-            <img src="/home_bg.jpg" alt="Person thinking for japanese vocabulary" className="flex justify-center h-[90%] object-cover" />
+            <img src="public/home_bg.jpg" alt="Person thinking for japanese vocabulary" className="flex justify-center h-[90%] object-cover" />
             </div>
             <div className="w-[50%] h-fullbg-opacity-80">
                 <h1 className="text-4xl font-bold">Get started with learning your first word!</h1>
