@@ -44,6 +44,12 @@ export default function Navbar() {
         router.push(`/profile`);
     }
 
+    const bugReportDialog = () => {
+        // setBugReportDialogOpen(true);
+        // console.log("Bug Report Dialog Opened");
+        router.push(`/bugreport`);
+    }
+
     useEffect(() => {
         setLoggedIn(false);
         loadUser();
@@ -103,7 +109,7 @@ export default function Navbar() {
                                 <DropdownMenuSeparator />
                                 <DropdownMenuItem onClick={openProfileDialog}>Profile</DropdownMenuItem>
                                 <DropdownMenuItem onClick={logout}>Log Out</DropdownMenuItem>
-                                <DropdownMenuItem>Bug Report</DropdownMenuItem>
+                                <DropdownMenuItem onClick={bugReportDialog}>Bug Report</DropdownMenuItem>
                             </DropdownMenuContent>
                             </DropdownMenu>
                         </div>
