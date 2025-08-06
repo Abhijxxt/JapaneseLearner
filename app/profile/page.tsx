@@ -34,9 +34,9 @@ export default function ProfileBox() {
     const [open, setOpen] = useState(false);
 
       const logout = () => {
-        localStorage.removeItem('user');
+        localStorage.removeItem("user");
         setUser({});
-        window.location.href = '/login';
+        window.location.href = "/login";
     }
 
     const updateButton = () => {
@@ -47,7 +47,7 @@ export default function ProfileBox() {
 
     const editPassword = (event : any) => {
         event.preventDefault();
-        if(event.target[0].value === '' || event.target[1].value === '') {
+        if(event.target[0].value === "" || event.target[1].value === "") {
             toast.error("Please fill in both password fields");
             return; 
         }
@@ -64,7 +64,7 @@ export default function ProfileBox() {
 
     const updateUser = async () => {
         console.log(user)
-        const response = await fetch('/api/updateUser', {
+        const response = await fetch("/api/updateUser", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -145,7 +145,7 @@ export default function ProfileBox() {
                         <DialogTrigger className="w-full"><p className="w-full mt-4 text-blue-700 hover:cursor-pointer ">Change Password</p></DialogTrigger>
                         <DialogContent>
                             <DialogHeader>
-                            <DialogTitle>What's your new password?</DialogTitle>
+                            <DialogTitle>What&apos;s your new password?</DialogTitle>
                             <DialogDescription>
                                 Please enter your new password below.
                             </DialogDescription>

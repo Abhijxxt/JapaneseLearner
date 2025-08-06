@@ -25,12 +25,12 @@ export default function Homepage() {
                 <h1 className="text-4xl font-bold">Get started with learning your first word!</h1>
                 <div className="mr-20 flex flex-col justify-end text-right items-end h-full mt-8">
                     <div className="flex flex-row justify-end items-center space-x-4">
-                        <p className="text-2xl">Don't know anything?</p>
+                        <p className="text-2xl">Don&apos;t know anything?</p>
                         <button onClick={wordlistLink} className="bg-amber-100 px-4 py-2 rounded-md flex flex-row items-center gap-1 transition-all ease-in-out shadow-md hover:shadow-none">Go to wordlist <FaArrowRight/></button>
                     </div>
                     <div className="flex flex-row justify-end items-center space-x-4 mt-4">
                         <p className="text-2xl">Already know some words?</p>
-                        <button onClick={testLink} className="bg-amber-100 ml-4 px-4 py-2 rounded-md flex flex-row items-center gap-1 transition-all ease-in-out shadow-md md hover:shadow-none">Let's test it <FaQuestion /></button>
+                        <button onClick={testLink} className="bg-amber-100 ml-4 px-4 py-2 rounded-md flex flex-row items-center gap-1 transition-all ease-in-out shadow-md md hover:shadow-none">Let&apos;s test it <FaQuestion /></button>
                     </div>
                 </div>
             </div>

@@ -75,7 +75,7 @@ export function QuestionBox({props, questionNumber, next, saved}:any) {
             }    
                 <p className="text-xs text-left">Answer above</p>
                 {answerBoxView && <AnswerBox props={props} next={nextQuestion} />}
-                {!answerBoxView && <button onClick={showAnswerButton} className="bg-red-400 w-full py-1 mt-4 transition-all ease-in-out shadow-xs hover:bg-red-500 hover:shadow-none">I don't know</button>}
+                {!answerBoxView && <button onClick={showAnswerButton} className="bg-red-400 w-full py-1 mt-4 transition-all ease-in-out shadow-xs hover:bg-red-500 hover:shadow-none">I don&apos;t know</button>}
 
         </div>
     )

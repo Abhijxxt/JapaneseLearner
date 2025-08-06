@@ -13,7 +13,7 @@ export default function TestPage() {
             <div className="px-18">
                 <div className="border-b-2 py-2 border-slate-900">
                     <h1 className="text-3xl text-amber-600 font-bold">Learnt some words?</h1>
-                    <h2 className="text-2xl">It's time to revise them!</h2>
+                    <h2 className="text-2xl">It&apos;s time to revise them!</h2>
                 </div>
                 <div className="flex flex-col mt-6 ">
                     <p className="text-xl py-2">Take test of - </p>
@@ -30,7 +30,7 @@ export default function TestPage() {
                                 {backgroundColor: "#7b3306", color: "#ffd230"} : {backgroundColor: "#ffd230"}}
                         >Random Words</button>
                     </div>
-                    <Link href={{pathname:"/test/test-list", query: {savedList: savedWordsList}}} className="text-left p-2 w-auto transition ease-in-out bg-amber-400 hover:bg-amber-700 mt-2 flex flex-row items-center justify-between ">Let's go <FaArrowRight /></Link>
+                    <Link href={{pathname:"/test/test-list", query: {savedList: savedWordsList}}} className="text-left p-2 w-auto transition ease-in-out bg-amber-400 hover:bg-amber-700 mt-2 flex flex-row items-center justify-between ">Let&apos;s go <FaArrowRight /></Link>
                     <p className="text-xs">By default saved list will be selected</p>
                 </div>
             </div>
