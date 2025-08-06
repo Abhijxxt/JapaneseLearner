@@ -12,11 +12,19 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { FaArrowDown } from "react-icons/fa";
 import { useRouter } from "next/navigation";
+
+type User = {
+  firstname: string;
+  lastname: string;
+  email: string;
+  uid: number;
+}
+
 export default function Navbar() {
     
     const router = useRouter();
 
-    const [user, setUser] : any = useState({});
+    const [user, setUser] = useState<User>({} as User);
     const [loggedIn, setLoggedIn] = useState(false);
     // const [profileDialogOpen, setProfileDialogOpen] = useState(false);
 
@@ -33,7 +41,7 @@ export default function Navbar() {
 
     const logout = () => {
         localStorage.removeItem('user');
-        setUser({});
+        setUser({} as User);
         setLoggedIn(false);
         // window.location.href = '/login';
     }

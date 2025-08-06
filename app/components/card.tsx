@@ -8,7 +8,22 @@ import { toast } from "sonner";
 import { checkLogin, getUserId } from "../middleware/checkLogin";
 import Link from "next/link";
 
-export default function Card({ props, savedPageStatus }: any) {
+
+type CardProps = {
+    props: {
+        wid: string;
+        image: string;
+        english: string;
+        japanese: string;
+        romanji: string;
+        kanji: string;
+        category: string;
+        subcategory: string;
+    };
+    savedPageStatus?: boolean;
+};
+
+export default function Card({ props, savedPageStatus = false }: CardProps) {
     
     const [englishView, setEnglishView] = useState(true);
     const [furiganaView, setFuriganaView] = useState(true);
