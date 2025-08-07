@@ -1,47 +1,87 @@
 'use client'
-import Link from "next/link";
-import {  useEffect, useState } from "react";
-import { FaArrowRight } from "react-icons/fa";
-import { checkLogin } from "../middleware/checkLogin";
-
+import { QuestionBox } from "@/app/components/question";
+import { getUserId } from "@/app/middleware/checkLogin";
+import { useSearchParams } from "next/navigation"
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
 export default function TestListBox() {
-    const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-    const [savedWordsList, setSavedWordsList] = useState<boolean>(isLoggedIn);
+    const searchParams = useSearchParams();
+    const savedList = searchParams.get('savedList');
+    const router = useRouter();
     
-    useEffect(() => {
-        setIsLoggedIn(checkLogin());
-        if(checkLogin()) {
-            setSavedWordsList(true);
+    // console.log(props.savedList)
+
+    const [words, setWords] = useState([])
+    const [questionNumber, setQuestionNumber] = useState<number>(0)
+    let question : any = "";
+    const [totalScore, setTotalScore] = useState(0);
+
+    const fetchSavedWordsList = async () => {
+        const uid = getUserId();
+        const response = await fetch("/api/savedwords", {
+            method: "POST",
+            headers: {
+                'Content-type': 'application/json'
+            }, 
+            body: JSON.stringify({
+                uid: uid
+            })
+        })
+        if(response.status !== 200) {
+            toast.error("There was an error loading page")
+            return;
+        }
+        const data = await response.json();
+        if(data.length === 0) {
+            toast.error("You have no saved words")
+            router.push("/test/test-list/completed?score=0&&total=0");
+            return;
+            
+        }
+        setWords(data)
+    }
+
+    const fetchRandomWordsList = async () => {
+        const response = await fetch("/api/wordlist")
+        if(response.status !== 200) {
+            toast.error("There was an error loading page")
+            return;
+        }
+        const data = await response.json();
+        setWords(data)
+    }
+
+    const nextQuestion = (score: number) => {
+        const newScore : number = totalScore + score;
+        console.log(newScore)
+        setTotalScore(newScore);
+        if(questionNumber < words.length-1) {
+            setQuestionNumber(questionNumber+1);
         } else {
-            setSavedWordsList(false);
+            toast.success("LIST COMPLETE")
+            router.push(`/test/test-list/completed?score=${newScore}&total=${words.length}`)
+        }
+    }
+
+    useEffect(() => {
+        if(savedList == "true") {
+            fetchSavedWordsList();
+        } else {
+            fetchRandomWordsList();
         }
     },[])
 
+
+    if(words.length > 0) {
+        question = words[questionNumber];
+    }
+
     return(
-        <div className="min-h-[90vh] bg-[url('/test_page_landing_page.jpg')] flex flex-row items-center">
-            <div className="px-18">
-                <div className="border-b-2 py-2 border-slate-900">
-                    <h1 className="text-3xl text-amber-600 font-bold">Learnt some words?</h1>
-                    <h2 className="text-2xl">It&apos;s time to revise them!</h2>
-                </div>
-                <div className="flex flex-col mt-6 ">
-                    <p className="text-xl py-2">Take test of - </p>
-                    <div className="flex flex-row">
-                        <button className="text-left w-[50%] p-2 transition ease-in-out bg-amber-200 hover:bg-amber-400"
-                            onClick={() => {setSavedWordsList(true)}}
-                            style={savedWordsList ? 
-                                {backgroundColor: "#7b3306", color: "#fee685"} : {backgroundColor: "#fee685"}}
-                            disabled={!isLoggedIn}
-                            >Saved Words</button>
-                        <button className="text-left w-[50%] p-2 transition ease-in-out bg-amber-300 hover:bg-amber-500"
-                            onClick={() => {setSavedWordsList(false)}}
-                            style={!savedWordsList ? 
-                                {backgroundColor: "#7b3306", color: "#ffd230"} : {backgroundColor: "#ffd230"}}
-                        >Random Words</button>
-                    </div>
-                    <Link href={{pathname:"/test/test-list", query: {savedList: savedWordsList}}} className="text-left p-2 w-auto transition ease-in-out bg-amber-400 hover:bg-amber-700 mt-2 flex flex-row items-center justify-between ">Let&apos;s go <FaArrowRight /></Link>
-                    <p className="text-xs">By default saved list will be selected</p>
-                </div>
+        <div className="bg-[url('/test-background.jpg')] min-h-[100vh] overflow-hidden bg-cover bg-no-repeat
+        flex flex-row justify-center items-center ">
+            <div>
+                <QuestionBox props={question} questionNumber={questionNumber+1} next={nextQuestion} saved={savedList}/> 
             </div>
         </div>
     )

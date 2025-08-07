@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { HiViewList } from "react-icons/hi";
 import { IoReload } from "react-icons/io5";
 
-export default function CompletiionBox() {
+export default function CompletionBox() {
     const searchParams = useSearchParams();
         const score = searchParams.get("score");
         const total = searchParams.get("total")
