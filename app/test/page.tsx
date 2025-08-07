@@ -1,16 +1,16 @@
 'use client'
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
 import { checkLogin } from "../middleware/checkLogin";
 
 export default function TestPage() {
-    let isLoggedIn = false;
+    const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
     const [savedWordsList, setSavedWordsList] = useState<boolean>(isLoggedIn);
     
     useEffect(() => {
-        isLoggedIn = checkLogin();
-        if(isLoggedIn) {
+        setIsLoggedIn(checkLogin());
+        if(checkLogin()) {
             setSavedWordsList(true);
         } else {
             setSavedWordsList(false);
