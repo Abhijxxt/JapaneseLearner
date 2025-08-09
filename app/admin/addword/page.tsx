@@ -1,15 +1,12 @@
 "use client";
 
 import Card from "@/app/components/card";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { redirect } from "next/navigation";
 
 export default function AddWordPage() {
 
-    if(localStorage.getItem("admin") === null) {
-        redirect("/admin/login");
-    }
 
     const [props, setProps] = useState({
         wid: "",
@@ -40,6 +37,12 @@ export default function AddWordPage() {
             toast.error('Error adding word!');
         }
     }
+
+    useEffect(() => {
+        if(localStorage.getItem("admin") === null) {
+            redirect("/admin/login");
+        }
+    }, [])
 
     return(
         <div className="bg-amber-100 flex flex-row items-center justify-center h-screen">
