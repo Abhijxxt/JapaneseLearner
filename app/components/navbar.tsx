@@ -88,20 +88,20 @@ export default function Navbar() {
     },[])
     // console.log(user);  
     return(
-        <div className="w-auto h-16 flex flex-row justify-between items-center bg-slate-50 py-7 lg:px-48 sm:px-2 shadow-md">
+        <div className="w-auto h-16 flex flex-row justify-between items-center bg-slate-50 py-7 px-48 max-lg:px-20 max-sm:px-4 shadow-md">
             <div className="title-container">
-                <h1 className="font-bold"><Link href="/">日本語 Learner</Link></h1>
+                <h1 className="font-bold max-sm:text-xs"><Link href="/">日本語 Learner</Link></h1>
                 <p className="text-xs">Japanese</p>
             </div>
             <div className="links-and-account-container flex flex-row justify-between items-center">
-                <div className="links-container mx-20">
+                <div className="links-container mx-20 max-sm:mx-4 max-sm:text-xs">
                     <Link href="/home" className="p-2 hover:underline">Home</Link>
                     <Link href="/wordlist" className="p-2 hover:underline">Words</Link>
                     <Link href="/test" className="p-2 hover:underline">Test</Link>
                 </div>
                 {
                     !loggedIn &&
-                    <div className="account-container">
+                    <div className="account-container max-sm:text-xs">
                         <Link href="/login" className="p-1 font-bold">Login</Link>/
                         <Link href="/signup" className="p-1">Signup</Link>
                     </div>
