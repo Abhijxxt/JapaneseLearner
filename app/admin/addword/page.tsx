@@ -50,7 +50,7 @@ export default function AddWordPage() {
                 }} className="bg-white p-2" />
                 <input type="text" placeholder="Enter english" onChange={(e) => {
                     setProps({ ...props, english: e.target.value });
-                }} className="bg-white p-2" required />
+                }} className="bg-white p-2" required autoFocus />
                 <input type="text" placeholder="Enter romanji" onChange={(e) => {
                         setProps({ ...props, romanji: e.target.value });
                     }} className="bg-white p-2" required/>
