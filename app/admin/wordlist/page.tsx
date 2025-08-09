@@ -69,7 +69,7 @@ export default function WordlistPage() {
                     </TableHeader>
                     <TableBody>
                         { words && words.map((word) => (
-                            <TableRow> 
+                            <TableRow key={word.wid}> 
                                 <TableHead className="text-center">{word.wid}</TableHead>
                                 <TableHead className="text-center">{word.english}</TableHead>
                                 <TableHead className="text-center">{word.japanese}</TableHead>

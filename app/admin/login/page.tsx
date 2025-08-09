@@ -2,6 +2,7 @@
 
 import { redirect } from "next/navigation"
 import { useEffect } from "react";
+import { toast } from "sonner";
 // import { useRouter } from "next/router"
 
 export default function LoginPage() {
@@ -26,7 +27,7 @@ export default function LoginPage() {
             localStorage.setItem('admin', JSON.stringify(data));
             redirect("/admin/dashboard")
         } else {
-            console.log("False")
+            toast.error("Login failed")
             alert("Login failed")
         }
     }
