@@ -59,23 +59,23 @@ export default function WordlistPage() {
         <div>
             <div className="flex flex-row w-auto justify-center items-center rounder-md">
                 <div className="bg-slate-200 shadow-md flex flex-row items-center justify-center rounded-md px-5">
-                <div className="p-2">
-                    <FaFilter />
-                </div>
-                <div className="p-2">
-                    {/* <Link href="" className="m-2 hover:underline focus:underline" onClick={() => {fetchWords()}}>All</Link> | */}
-                    <Link href="" className="m-2 hover:underline focus:underline" onClick={() => {getFilteredWord("Noun")}}>Noun</Link> |
-                    <Link href="" className="m-2 hover:underline focus:underline" onClick={() => {getFilteredWord("Adjective")}}>Adjective</Link> |
-                    <Link href="" className="m-2 hover:underline focus:underline" onClick={() => {getFilteredWord("Verb")}}>Verb</Link>
-                </div>
+                    <div className="p-2">
+                        <FaFilter />
+                    </div>
+                    <div className="p-2">
+                        {/* <Link href="" className="m-2 hover:underline focus:underline" onClick={() => {fetchWords()}}>All</Link> | */}
+                        <Link href="" className="m-2 hover:underline focus:underline" onClick={() => {getFilteredWord("Noun")}}>Noun</Link> |
+                        <Link href="" className="m-2 hover:underline focus:underline" onClick={() => {getFilteredWord("Adjective")}}>Adjective</Link> |
+                        <Link href="" className="m-2 hover:underline focus:underline" onClick={() => {getFilteredWord("Verb")}}>Verb</Link>
+                    </div>
                 </div>
             </div>
-                <div className="fixed bg-slate-100 p-2 rounded-md text-2xl top-24 right-10 z-20 flex flex-col items-center space-y-2">
+                <div className="fixed bg-slate-100 p-2 rounded-md text-2xl bottom-10 right-5 z-20 flex flex-col items-center space-y-2">
                     <div className="border-b-2 border-amber-900"><button className="hover:cursor-pointer" onClick={fetchWords}><HiViewList /></button></div>
                     <div className=""><button className="hover:cursor-pointer" onClick={goToSavedWords}><CiSaveDown2 /></button></div>
                     
                 </div>
-            <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1">
+            <div className="max-sm:ml-0 max-sm:flex max-sm:flex-col max-sm:justify-center max-sm:items-center max-lg:ml-10 grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2">
                 {words && words.map((word: any) => (
                     <Card key={word.id} props={word} savedPageStatus={false} />
                 ))}
