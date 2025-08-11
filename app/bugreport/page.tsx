@@ -23,8 +23,8 @@ export default function BugReportPage() {
     const [description, setDescription] = useState('');
 
     const sendBugReport = async () => {
-        if(topic === '' || description === '') {
-            toast.warning("Please fill in both fields");
+        if(topic === '') {
+            toast.warning("Please fill in topic field");
             return;
         }
         if(!checkLogin()) {
@@ -62,8 +62,8 @@ export default function BugReportPage() {
             {/* Black gradient overlay */}
             <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-black/40" />
             {/* Content */}
-            <div className="relative z-10 w-full flex items-center justify-center">
-                <Card className="w-[30%] h-auto p-4 shadow-lg">
+            <div className="relative z-10 w-full flex items-center justify-center p-4">
+                <Card className="w-[30%] max-md:w-full h-auto p-4 shadow-lg">
                     <CardHeader>
                         <CardTitle className="flex flex-row mb-1"><FaQuestion className="mr-2"/> Bug Report</CardTitle>
                         <CardDescription>Have trouble with the site? File here and we will improve the experience.</CardDescription>
