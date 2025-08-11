@@ -75,7 +75,7 @@ export default function WordlistPage() {
                     <div className=""><button className="hover:cursor-pointer" onClick={goToSavedWords}><CiSaveDown2 /></button></div>
                     
                 </div>
-            <div className="max-sm:ml-0 max-sm:flex max-sm:flex-col max-sm:justify-center max-sm:items-center max-lg:ml-10 grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2">
+            <div className="grid justify-items-center xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1">
                 {words && words.map((word: any) => (
                     <Card key={word.id} props={word} savedPageStatus={false} />
                 ))}

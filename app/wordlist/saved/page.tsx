@@ -74,7 +74,7 @@ export default function SavedPage() {
                     <div className=""><button className="hover:cursor-pointer" onClick={savedWords}><CiSaveDown2 /></button></div>
                     
                 </div>
-            <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1">
+            <div className="justify-items-center grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2">
                 {filteredWords && filteredWords.map((word: any) => (
                     <Card key={word.id} props={word} savedPageStatus={true} />
                 ))}
