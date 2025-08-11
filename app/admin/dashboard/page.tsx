@@ -1,23 +1,25 @@
 'use client'
 // import { prisma } from "@/prisma/client";
 import { redirect } from "next/navigation"
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 export default function AdminDashboardPage() {
 
+    const router = useRouter();
     // const [numberOfBugs, setNumberOfBugs] = useState(0);
     // const [numberOfWords, setNumberOfWords] = useState(0);
 
     const BugsReportPage = () => {
-        redirect("/admin/dashboard/bugsreport");
+        router.push("/admin/dashboard/bugsreport");
     }
 
     const AddWordPage = () => {
-        redirect("/admin/addword");
+        router.push("/admin/addword");
     }
 
     const WordListPage = () => {
-        redirect("/admin/wordlist");
+        router.push("/admin/wordlist");
     }
 
     // const GetNumberOfBugs = async () => {

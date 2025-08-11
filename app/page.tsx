@@ -1,5 +1,7 @@
 "use client"
 import { useEffect, useState } from "react";
+import { checkLogin } from "./middleware/checkLogin";
+import { useRouter } from "next/navigation";
 
 type Word = {
   kanji?: string;
@@ -9,6 +11,7 @@ type Word = {
 }
 
 export default function Home() {
+  const router = useRouter();
 
   const [word, setWord] = useState<Word>({
     english: "",
@@ -25,6 +28,14 @@ export default function Home() {
     }
   }
 
+  const goToWordList = () => {
+    if(checkLogin()) {
+      router.push('/wordlist')
+    } else {
+      router.push('/login')
+    }
+  }
+
   useEffect(() => {
     getWord();
   },[])
@@ -34,10 +45,9 @@ export default function Home() {
       <div className="mr-10">
         <p className="text-4xl text-pink-600">外出先で日本語を学ぶ</p>
         <p className="text-2xl">Learn Japanese on the go</p>
-        <button className="bg-amber-600 px-4 py-2 text-xl mt-4">Get started</button>
+        <button className="bg-amber-600 px-4 py-2 text-xl mt-4 rounded-md shadow-md transition-all hover:shadow-none" onClick={goToWordList}>Get started</button>
       </div>
-      <div className="ml-10 p-4 rounded-md shadow-md">
-        <div className="bg-gradient-to-br from-pink-300 to-pink-600 opacity-50"></div>
+      <div className="ml-10 p-4 rounded-md shadow-md bg-gradient-to-b from-pink-300 ">
         <div>
           <h1 className="text-3xl ">{word.kanji}</h1>
           <p className="text-xl">English: {word.english}</p>
