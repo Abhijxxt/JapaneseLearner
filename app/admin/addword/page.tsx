@@ -33,6 +33,16 @@ export default function AddWordPage() {
             const data = await response.json();
             toast.success('Word added successfully:', data);
             event.target.reset();
+            setProps({
+                wid: "",
+                image: "",
+                english: "",
+                japanese: "",
+                romanji: "",
+                kanji: "",
+                category: "",
+                subcategory: ""  
+            })
         } else {
             toast.error('Error adding word!');
         }
