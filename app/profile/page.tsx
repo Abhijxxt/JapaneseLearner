@@ -110,15 +110,15 @@ export default function ProfileBox() {
 
     return (
         <div className="w-full h-[90vh] flex items-center justify-center">
-            <Card className="w-[30%] h-auto p-4 shadow-lg">
+            <Card className="w-[30%] h-auto p-4 shadow-lg max-lg:w-[90%]">
                 <CardHeader>
                     <CardTitle>Profile page</CardTitle>
                     <CardDescription>View/Edit your profile data</CardDescription>
                     <CardAction><Button onClick={logout}>Log out</Button></CardAction>
                 </CardHeader>
                 <CardContent>
-                    <div className="flex flex-row gap-1">
-                        <div>
+                    <div className="w-[100%] flex flex-row gap-1">
+                        <div className="w-[50%]">
                             <Label className="text-lg font-semibold">First Name:</Label>
                             <Input
                                 defaultValue={user.firstname || ''}
@@ -128,7 +128,7 @@ export default function ProfileBox() {
                                 className="mb-2"
                             />
                         </div>
-                        <div>
+                        <div className="w-[50%]">
                             <Label className="text-lg font-semibold">Last Name:</Label>
                             <Input defaultValue={user.lastname || ''} 
                              onChange={(e) => setUser({ ...user, lastname: e.target.value })}
