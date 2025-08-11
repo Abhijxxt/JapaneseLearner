@@ -82,7 +82,7 @@ export default function AddWordPage() {
                 </select>
                 <input type="text" placeholder="Sub category" onChange={(e) => {
                     setProps({ ...props, subcategory: e.target.value });
-                }} className="bg-white p-2" required/>
+                }} className="bg-white p-2"/>
                 <input type="submit" value="Add word" className="bg-green-400 p-3 rounded-md transition-all ease-in-out hover:bg-green-600" />
             </form>
             <div>
