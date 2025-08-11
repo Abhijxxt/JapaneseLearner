@@ -110,7 +110,7 @@ export default function Card({ props, savedPageStatus = false }: CardProps) {
     return (
         <div key={props.wid} className="flex flex-col text-black transition-all ease-in-out bg-gradient-to-br from-gray-50  to-gray-200 border-[1px] border-slate-400 w-fit p-2 rounded-md m-10 shadow-xl hover:shadow-md  "
             style={display ? {}: {display: "none"}}    >
-            <div className="mb-4 w-[220px] h-[120px] flex items-center justify-center overflow-hidden">
+            <div className="mb-4 w-[220px] h-[120px] max-sm:w-[250px] max-sm:h-[150px] max-lg:w-[240px] flex items-center justify-center overflow-hidden">
                 <Image
                     src={props.image !== "" ? props.image : "https://images.pexels.com/photos/28216688/pexels-photo-28216688.png"}
                     alt={props.english}
