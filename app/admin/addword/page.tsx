@@ -21,7 +21,7 @@ export default function AddWordPage() {
 
     const addWord = async (event : any) => {
         event.preventDefault();
-        const response = await fetch('/api/addword', {
+        const response = await fetch('/api/admin/addword', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
