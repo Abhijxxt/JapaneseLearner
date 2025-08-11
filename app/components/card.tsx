@@ -149,7 +149,7 @@ export default function Card({ props, savedPageStatus = false }: CardProps) {
             </button>
             <div className="flex flex-row justify-between m-1">
                 <div className="">
-                    <p className="mt-2">{props.category} {props.subcategory == "None" ? "" : `| ${props.subcategory}`} </p>
+                    <p className="mt-2">{props.category} {props.subcategory == "None" || props.subcategory == "" ? "" : `| ${props.subcategory}`} </p>
                 </div>
                 <div className="flex justify-center items-center">
                 {
