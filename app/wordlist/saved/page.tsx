@@ -69,7 +69,7 @@ export default function SavedPage() {
                 </div>
                 </div>
             </div>
-                <div className="fixed bg-slate-100 p-2 rounded-md text-2xl top-24 right-10 z-20 flex flex-col items-center space-y-2">
+                <div className="fixed bg-slate-100 p-2 rounded-md text-2xl bottom-10 right-10 z-20 flex flex-col items-center space-y-2">
                     <div className="border-b-2 border-amber-900"><button className="hover:cursor-pointer" onClick={goToWordlist}><HiViewList /></button></div>
                     <div className=""><button className="hover:cursor-pointer" onClick={savedWords}><CiSaveDown2 /></button></div>
                     
