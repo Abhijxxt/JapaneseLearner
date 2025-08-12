@@ -29,6 +29,7 @@ export default function Card({ props, savedPageStatus = false }: CardProps) {
     const [furiganaView, setFuriganaView] = useState(true);
     const [romanjiView, setRoamnjiView] = useState(true);
     const [kanjiView, setKanjiView] = useState(true);
+    const [proficiencyMessage, setProficiencyMessage] = useState("");
 
     const [saved, setSaved] = useState(false);
 
@@ -99,12 +100,44 @@ export default function Card({ props, savedPageStatus = false }: CardProps) {
             toast.warning("Word unsaved!")
             setDisplay(false);
         }
+    }
 
+    const proficiencySetter = async () => {
+        const response = await fetch("/api/saved-proficiency", {
+            method: "POST",
+            headers : {
+                "Content-type" : "application/json"
+            }, 
+            body: JSON.stringify({
+                uid: getUserId(),
+                wid: props.wid
+            })
+        })
+        if(response.status !== 200) {
+            setProficiencyMessage("")
+            return;
+        }
+        const data = await response.json();
+        const proficiency = data[0].proficiency;
+        if(proficiency <= 10) {
+            setProficiencyMessage("Practice more")
+        } else if(proficiency > 10 && proficiency <= 30) {
+            setProficiencyMessage("Beginner")
+        } else if(proficiency > 30 && proficiency <= 50) {
+            setProficiencyMessage("Intermediate")
+        } else if(proficiency > 50 && proficiency <= 80) {
+            setProficiencyMessage("Professional")
+        } else {
+            setProficiencyMessage("Master")
+        }
+        // console.log(data[0])
+        // setProficiencyMessage(data[0].proficiency)
     }
 
     checkForSaved()
     useEffect(() => {
         // checkForSaved()
+        proficiencySetter()
     }, [])
     
     return (
@@ -119,28 +152,28 @@ export default function Card({ props, savedPageStatus = false }: CardProps) {
                     className="rounded-md object-cover w-full h-full"
                 />
             </div>
-            <button className="bg-blue-100 " onClick={() => {setEnglishView(!englishView)}}>
+            <button className="bg-orange-100 " onClick={() => {setEnglishView(!englishView)}}>
                 <h1 style={{
                     backgroundColor: englishView ? "transparent" : "black",
                     color: englishView ? "inherit" : "black",
                     padding: "0.5rem"
                 }} >English: {props.english}</h1>
             </button>
-            <button className="bg-blue-200 " onClick={() => {setFuriganaView(!furiganaView)}}>
+            <button className="bg-orange-200 " onClick={() => {setFuriganaView(!furiganaView)}}>
                 <h1 style={{
                     backgroundColor: furiganaView ? "transparent" : "black",
                     color: furiganaView ? "inherit" : "black",
                     padding: "0.5rem"
                 }} >Furigana: {props.japanese}</h1>
             </button>
-            <button className="bg-blue-300 " onClick={() => {setRoamnjiView(!romanjiView)}}>
+            <button className="bg-orange-300 " onClick={() => {setRoamnjiView(!romanjiView)}}>
                 <h1 style={{
                     backgroundColor: romanjiView ? "transparent" : "black",
                     color: romanjiView ? "inherit" : "black",
                     padding: "0.5rem"
                 }}>Romanji: {props.romanji}</h1>
             </button>
-            <button className="bg-blue-400 " onClick={() => {setKanjiView(!kanjiView)}}>
+            <button className="bg-orange-400 " onClick={() => {setKanjiView(!kanjiView)}}>
                 <h1 style={{
                     backgroundColor: kanjiView ? "transparent" : "black",
                     color: kanjiView? "inherit" : "black",
@@ -165,6 +198,9 @@ export default function Card({ props, savedPageStatus = false }: CardProps) {
                 }
                 </div>
             </div>
+            {savedPageStatus && 
+                <p className="font-bold mt-2" >Proficiency: {proficiencyMessage}</p>
+            }
                 <Link className="text-sm mt-2 text-blue-800" target="_blank" href={`https://jisho.org/search/${props.japanese}`}>Click for more</Link>
         </div>
     )
