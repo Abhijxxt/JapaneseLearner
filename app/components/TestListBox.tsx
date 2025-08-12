@@ -1,6 +1,7 @@
 'use client'
 import { QuestionBox } from "@/app/components/question";
 import { getUserId } from "@/app/middleware/checkLogin";
+import { Button } from "@/components/ui/button";
 import { useSearchParams } from "next/navigation"
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -64,6 +65,10 @@ export default function TestListBox() {
         }
     }
 
+    const quitTest = () => {
+        router.push(`/test/test-list/completed?score=${totalScore}&total=${words.length}`)
+    }
+
     useEffect(() => {
         if(savedList == "true") {
             fetchSavedWordsList();
@@ -78,10 +83,13 @@ export default function TestListBox() {
     }
 
     return(
-        <div className="bg-[url('/test-background.jpg')] min-h-[100vh] overflow-hidden bg-cover bg-no-repeat
+        <div className="bg-[url('/test-background.jpg')] min-h-[90vh] overflow-hidden bg-cover bg-no-repeat
         flex flex-row justify-center items-center ">
             <div>
                 <QuestionBox props={question} questionNumber={questionNumber+1} next={nextQuestion} saved={savedList}/> 
+                <div className="absolute top-20 right-8 max-sm:right-4">
+                    <Button className="bg-red-700" onClick={quitTest}>Quit test</Button>
+                </div>
             </div>
         </div>
     )
