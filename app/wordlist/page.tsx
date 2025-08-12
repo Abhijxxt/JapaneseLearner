@@ -15,7 +15,7 @@ export default function WordlistPage() {
 
     const fetchWords = async () => {
        
-        const response = await fetch("/api/wordlist");
+        const response = await fetch("/api/wordlist?limit=12");
         if(response.status !== 200) {
             alert("Some error occured while fetching data! Please reload");
             return;

@@ -43,7 +43,7 @@ export default function TestListBox() {
     }
 
     const fetchRandomWordsList = async () => {
-        const response = await fetch("/api/wordlist")
+        const response = await fetch("/api/wordlist?limit=10")
         if(response.status !== 200) {
             toast.error("There was an error loading page")
             return;

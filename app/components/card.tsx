@@ -137,7 +137,9 @@ export default function Card({ props, savedPageStatus = false }: CardProps) {
     checkForSaved()
     useEffect(() => {
         // checkForSaved()
-        proficiencySetter()
+        if(savedPageStatus) {
+            proficiencySetter()
+        }
     }, [])
     
     return (

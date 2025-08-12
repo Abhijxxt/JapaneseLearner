@@ -10,7 +10,14 @@ export async function GET(request: NextRequest) {
     // const wordlist = await prisma.words.findMany({
     //     take: 10
     // }); 
-    const wordlist = await prisma.$queryRaw`SELECT * FROM Words ORDER BY RAND() LIMIT 10`;
+    let limit = 10;
+    const { searchParams } = new URL(request.url);
+    if(searchParams.get("limit")) {
+        limit = Number(searchParams.get("limit"))
+    } else {
+        limit = 10;
+    }
+    const wordlist = await prisma.$queryRaw`SELECT * FROM Words ORDER BY RAND() LIMIT ${limit}`;
     if(!wordlist) {
         return NextResponse.json(wordlist, {status: 400});
     }
