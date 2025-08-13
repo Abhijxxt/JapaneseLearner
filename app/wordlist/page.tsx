@@ -121,6 +121,7 @@ export default function WordlistPage() {
                             <DropdownMenuItem onClick={() => {getFilteredWord("Noun")}} >Noun</DropdownMenuItem>
                             <DropdownMenuItem onClick={() => {getFilteredWord("Adjective")}} >Adjective</DropdownMenuItem>
                             <DropdownMenuItem onClick={() => {getFilteredWord("Verb")}} >Verb</DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => {getFilteredWord("Pronouns")}} >Pronouns</DropdownMenuItem>
                             <DropdownMenuItem onClick={() => {getFilteredWord("Preposition")}} >Preposition</DropdownMenuItem>
                             <DropdownMenuItem onClick={() => {getFilteredWord("Conjunction")}} >Conjunction</DropdownMenuItem>
                             <DropdownMenuItem onClick={() => {getFilteredWord("Adverbs")}} >Adverbs</DropdownMenuItem>
