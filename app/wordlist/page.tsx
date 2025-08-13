@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react"
 import Card from "../components/card";
 import Link from "next/link";
-import { FaFilter } from "react-icons/fa";
+import { FaFilter, FaQuestionCircle } from "react-icons/fa";
 import { HiViewList } from "react-icons/hi";
 import { CiSaveDown2, CiSearch } from "react-icons/ci";
 import { toast } from "sonner";
@@ -30,6 +30,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { CircleQuestionMark } from "lucide-react";
 
 
 export default function WordlistPage() {
@@ -110,8 +111,8 @@ export default function WordlistPage() {
 
     return(
         <div>
-            <div className="flex flex-row w-auto justify-start items-center rounder-md">
-                <div className="bg-slate-200 shadow-md flex flex-row items-start justify-start rounded-md px-5 ml-10">
+            <div className="flex flex-row w-auto justify-between items-center rounder-md mx-4">
+                <div className="bg-slate-200 shadow-md flex flex-row items-start justify-start rounded-md px-5">
                     <div className="">
                         <DropdownMenu>
                             <DropdownMenuTrigger className="px-2 py-3 outline-none"><FaFilter /></DropdownMenuTrigger>
@@ -132,6 +133,9 @@ export default function WordlistPage() {
 
                     </div>
                 </div>
+                    <div className="bg-red-600 text-white px-3 py-2 rounded-md shadow-md transition-all hover:shadow-none">
+                        <Link href={"/wordlist/basics"}>Learn basics</Link>
+                    </div>
             </div>
                 <div className="fixed bg-slate-100 p-2 rounded-md text-2xl bottom-10 right-5 z-20 flex flex-col items-center space-y-2">
                     <div className="border-b-2 border-amber-900">
@@ -153,7 +157,6 @@ export default function WordlistPage() {
                                 </AlertDialogFooter>
                             </AlertDialogContent>
                         </AlertDialog>
-
                     </div>
                     <div className="border-b-2 border-amber-900"><button className="hover:cursor-pointer" onClick={fetchWords}>
                         {!wordlistIcon && <HiViewList /> || <IoReload />}
