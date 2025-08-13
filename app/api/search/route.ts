@@ -5,9 +5,28 @@ export async function POST(request: NextRequest) {
     const { word } = await request.json();
     const search = await prisma.words.findMany({
         where: {
-            english: {
-                contains: word,
-            }
+            OR: [
+                {
+                    english: {
+                        contains: word,
+                    }
+                },
+                {
+                    japanese: {
+                        contains: word,
+                    }
+                },
+                {
+                    kanji: {
+                        contains: word,
+                    }
+                },
+                {
+                    romanji: {
+                        contains: word,
+                    }
+                }
+            ]
         }
     })
     if(!search) {
