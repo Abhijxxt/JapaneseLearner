@@ -79,6 +79,11 @@ export default function AddWordPage() {
                     <option value="Noun">Noun</option>
                     <option value="Verb">Verb</option>
                     <option value="Adjective">Adjective</option>
+                    <option value="Adjective">Preposition</option>
+                    <option value="Adjective">Conjunction</option>
+                    <option value="Adjective">Adverbs</option>
+                    <option value="Adjective">Determiners</option>
+                    <option value="Adjective">Interjections</option>
                 </select>
                 <input type="text" placeholder="Sub category" onChange={(e) => {
                     setProps({ ...props, subcategory: e.target.value });
