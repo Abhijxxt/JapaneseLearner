@@ -9,6 +9,16 @@ import { FaFilter } from "react-icons/fa";
 import { HiViewList } from "react-icons/hi";
 import { toast } from "sonner";
 
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+
+
 export default function SavedPage() {
 
     const router = useRouter();
@@ -56,16 +66,26 @@ export default function SavedPage() {
 
     return (
         <div>
-             <div className="flex flex-row w-auto justify-center items-center rounder-md">
-                <div className="bg-slate-200 shadow-md flex flex-row items-center justify-center rounded-md px-5">
-                <div className="p-2">
-                    <FaFilter />
-                </div>
-                <div className="p-2">
-                    {/* <Link href="" className="m-2 hover:underline focus:underline" onClick={() => {fetchWords()}}>All</Link> | */}
-                    <Link href="" className="m-2 hover:underline focus:underline" onClick={() => {getFilteredWord("Noun")}}>Noun</Link> |
-                    <Link href="" className="m-2 hover:underline focus:underline" onClick={() => {getFilteredWord("Adjective")}}>Adjective</Link> |
-                    <Link href="" className="m-2 hover:underline focus:underline" onClick={() => {getFilteredWord("Verb")}}>Verb</Link>
+             <div className="flex flex-row w-auto justify-start items-center rounder-md">
+                <div className="bg-slate-200 shadow-md flex flex-row items-start justify-start rounded-md px-5 ml-10">
+                <div className="">
+                    <DropdownMenu>
+                            <DropdownMenuTrigger className="px-2 py-3 outline-none"><FaFilter /></DropdownMenuTrigger>
+                        <DropdownMenuContent>
+                            <DropdownMenuLabel>Filter</DropdownMenuLabel>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem onClick={() => {getFilteredWord("Noun")}} >Noun</DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => {getFilteredWord("Adjective")}} >Adjective</DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => {getFilteredWord("Verb")}} >Verb</DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => {getFilteredWord("Pronouns")}} >Pronouns</DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => {getFilteredWord("Preposition")}} >Preposition</DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => {getFilteredWord("Conjunction")}} >Conjunction</DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => {getFilteredWord("Adverbs")}} >Adverbs</DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => {getFilteredWord("Determiners")}} >Determiners</DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => {getFilteredWord("Interjections")}}>Interjections</DropdownMenuItem>
+                        </DropdownMenuContent>
+                        </DropdownMenu>
+
                 </div>
                 </div>
             </div>
