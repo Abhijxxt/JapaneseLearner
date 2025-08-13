@@ -4,14 +4,30 @@ import Card from "../components/card";
 import Link from "next/link";
 import { FaFilter } from "react-icons/fa";
 import { HiViewList } from "react-icons/hi";
-import { CiSaveDown2 } from "react-icons/ci";
+import { CiSaveDown2, CiSearch } from "react-icons/ci";
 import { toast } from "sonner";
 import { checkLogin, getUserId } from "../middleware/checkLogin";
 import { useRouter } from "next/navigation";
+import { IoReload } from "react-icons/io5";
+
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+import { Input } from "@/components/ui/input";
 
 export default function WordlistPage() {
     const router = useRouter();
     const [words, setWords] = useState([]);
+
+    const [wordlistIcon, refreshWordlistIcon] = useState(false)
 
     const fetchWords = async () => {
        
@@ -22,6 +38,7 @@ export default function WordlistPage() {
         }
         const data = await response.json();
         setWords(data);
+        refreshWordlistIcon(true)
     }
 
     const getFilteredWord = async (category: string) => {
@@ -40,6 +57,7 @@ export default function WordlistPage() {
         }
         const data = await response.json();
         setWords(data);
+        refreshWordlistIcon(false)
     }
 
     const goToSavedWords = () => {
@@ -47,7 +65,33 @@ export default function WordlistPage() {
             toast.error("Please login to view saved words");
             return;
         }
+        refreshWordlistIcon(false);
         router.push("/wordlist/saved");
+    }
+
+    const searchWord = async () => {
+        const input = document.getElementById("search-word") as HTMLInputElement;
+        const word = input?.value.trim();
+        if(!word) {
+            toast.warning("Type some word to search")
+            return;
+        }
+        const response = await fetch("/api/search", {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify({
+                word
+            })
+        })
+        if(response.status !== 200) {
+            toast.error("Didn't find")
+        } else {
+            const data = await response.json();
+            setWords(data)
+        }
+        refreshWordlistIcon(false);
     }
 
     useEffect(() => { 
@@ -71,9 +115,31 @@ export default function WordlistPage() {
                 </div>
             </div>
                 <div className="fixed bg-slate-100 p-2 rounded-md text-2xl bottom-10 right-5 z-20 flex flex-col items-center space-y-2">
-                    <div className="border-b-2 border-amber-900"><button className="hover:cursor-pointer" onClick={fetchWords}><HiViewList /></button></div>
+                    <div className="border-b-2 border-amber-900">
+
+                        <AlertDialog>
+                            <AlertDialogTrigger><CiSearch/></AlertDialogTrigger>
+                            <AlertDialogContent>
+                                <AlertDialogHeader>
+                                <AlertDialogTitle>Search for any word here</AlertDialogTitle>
+                                <AlertDialogDescription>
+                                    Enter word or part of it to search here:
+                                    <Input type="text"  id="search-word"/>
+                                    
+                                </AlertDialogDescription>
+                                </AlertDialogHeader>
+                                <AlertDialogFooter>
+                                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                <AlertDialogAction onClick={searchWord}>Continue</AlertDialogAction>
+                                </AlertDialogFooter>
+                            </AlertDialogContent>
+                        </AlertDialog>
+
+                    </div>
+                    <div className="border-b-2 border-amber-900"><button className="hover:cursor-pointer" onClick={fetchWords}>
+                        {!wordlistIcon && <HiViewList /> || <IoReload />}
+                    </button></div>
                     <div className=""><button className="hover:cursor-pointer" onClick={goToSavedWords}><CiSaveDown2 /></button></div>
-                    
                 </div>
             <div className="grid justify-items-center xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1">
                 {words && words.map((word: any) => (
