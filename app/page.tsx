@@ -41,13 +41,14 @@ export default function Home() {
   },[])
 
   return (
-    <div className="w-[100%] h-[90vh] bg-[url('/landing-page-bg.jpg')] bg-cover object-right  bg-no-repeat bg-slate-100 flex flex-row justify-center items-center">
-      <div className="mr-10">
-        <p className="text-4xl text-pink-600">外出先で日本語を学ぶ</p>
+    <div className="w-[100%] h-[90vh] bg-[url('/landing_page_bg.webp')] bg-cover object-right bg-no-repeat bg-slate-100 flex flex-row justify-center max-sm:justify-end items-center">
+      {/* max-sm:bg-slate-50 max-sm:rounded-md max-sm:w-full max-sm:mr-4 max-sm:m-4  */}
+      <div className="mr-10 max-sm:w-[60%] max-sm:mr-2 max-sm:text-right">
+        <p className="text-4xl text-pink-600 ">外出先で日本語を学ぶ</p>
         <p className="text-2xl">Learn Japanese on the go</p>
         <button className="bg-amber-600 px-4 py-2 text-xl mt-4 rounded-md shadow-md transition-all hover:shadow-none" onClick={goToWordList}>Get started</button>
       </div>
-      <div className="ml-10 p-4 rounded-md shadow-md bg-gradient-to-br from-pink-300 max-lg:hidden">
+      <div className="ml-10 p-4 rounded-md shadow-md bg-gradient-to-br from-pink-300 to-pink-600 max-lg:hidden">
         <div>
           <h1 className="text-3xl ">{word.kanji}</h1>
           <p className="text-xl">English: {word.english}</p>

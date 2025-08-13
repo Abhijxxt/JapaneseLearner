@@ -83,7 +83,7 @@ export default function TestListBox() {
     }
 
     return(
-        <div className="bg-[url('/test-background.jpg')] min-h-[90vh] overflow-hidden bg-cover bg-no-repeat
+        <div className="bg-[url('/test-background.webp')] min-h-[90vh] overflow-hidden bg-cover bg-no-repeat
         flex flex-row justify-center items-center ">
             <div>
                 <QuestionBox props={question} questionNumber={questionNumber+1} next={nextQuestion} saved={savedList}/> 

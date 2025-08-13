@@ -59,7 +59,7 @@ export default function SignupPage() {
     }
 
     return(
-        <div className="bg-purple-50 bg-[url('/login-signup-bg.jpg')] bg-cover bg-no-repeat h-[90vh] flex flex-col w-screen justify-center items-center">
+        <div className="bg-purple-50 bg-[url('/login-signup-bg.webp')] bg-cover bg-no-repeat h-[90vh] flex flex-col w-screen justify-center items-center">
             <form className="px-10 py-6 bg-slate-100 shadow-lg" onSubmit={signup} >
                 <div className="w-[100%] flex flex-row justify-center items-center gap-2 m-2">
                     <input type="text" name="" placeholder="First name" id="" className="w-[50%] p-2 rounded-md bg-amber-600 text-black"/>

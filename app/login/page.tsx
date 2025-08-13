@@ -44,7 +44,7 @@ export default function LoginPage() {
     }
 
     return(
-        <div className="bg-purple-50 bg-[url('/login-signup-bg.jpg')] bg-cover bg-no-repeat h-[90vh] flex flex-col w-screen justify-center items-center">
+        <div className="bg-purple-50 bg-[url('/login-signup-bg.webp')] bg-cover bg-no-repeat h-[90vh] flex flex-col w-screen justify-center items-center">
             <form className=" bg-slate-100 px-10 py-6 shadow-lg" onSubmit={login}>
                 <input type="email" placeholder="abcd@xmy.com" className="p-2 m-2 rounded-md bg-amber-600 text-black"/><br/>
                 <input type="password" placeholder="********" className="p-2 m-2 rounded-md bg-amber-600 text-black" /><br/>

@@ -18,7 +18,7 @@ export default function TestListPage() {
     },[])
 
     return(
-        <div className="min-h-[90vh] bg-[url('/test_page_landing_page.jpg')] flex flex-row items-center">
+        <div className="min-h-[90vh] bg-[url('/test_page_landing_page.webp')] flex flex-row items-center">
             <div className="px-18">
                 <div className="border-b-2 py-2 border-slate-900">
                     <h1 className="text-3xl text-amber-600 font-bold">Learnt some words?</h1>

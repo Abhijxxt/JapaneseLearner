@@ -58,7 +58,7 @@ export default function BugReportPage() {
     return (
         <div className="w-full h-[90vh] relative flex items-center justify-center">
             {/* Background image */}
-            <div className="absolute inset-0 bg-[url('/bug-report.jpg')] bg-no-repeat bg-cover" />
+            <div className="absolute inset-0 bg-[url('/bug-report.webp')] bg-no-repeat bg-cover" />
             {/* Black gradient overlay */}
             <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-black/40" />
             {/* Content */}
